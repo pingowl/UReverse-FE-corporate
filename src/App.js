@@ -1,23 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Header from './component/common/Header/Header';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ display: 'flex' }}>
+      <div style={{ flex: 1 }}>
+        <Header />
+        <main style={{ padding: '20px' }}>
+          <h2>본문 콘텐츠</h2>
+        </main>
+      </div>
     </div>
   );
 }
