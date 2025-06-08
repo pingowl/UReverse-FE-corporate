@@ -1,0 +1,76 @@
+.sidebar {
+  width: 340px;
+  height: 100vh;
+  padding: 24px;
+  box-sizing: border-box;
+  background-color: #FCFCFC;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logoText {
+  font-family: 'KCC-Ganpan', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.menuList {
+  margin-top: 48px;
+  list-style: none;
+  padding: 0;
+}
+
+.menuItem {
+  margin-bottom: 16px;
+  border-radius: 10px;
+}
+
+.menuLink {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+  border-radius: 10px;
+}
+
+.menuLink:hover {
+  background-color: #d4f0e5;
+}
+.menuLink.inspectorMenuLink:hover {
+  background-color: #FFF3B0;  
+}
+.menuIcon {
+  width: 30px;
+  height: 30px;
+  margin-right: 12px;
+}
+
+.menuLabel {
+  font-size: 16px;
+  color: #333;
+}
+
+.active .menuLink {
+  background-color: #77BFA3;
+}
+
+.active .menuIcon {
+  filter: brightness(0) invert(1); 
+}
+
+.active .menuLabel {
+  color: white;
+}
+
+.menuItem.inspectorActive .menuLink {
+  background-color: #FFD43B;
+}

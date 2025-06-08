@@ -1,0 +1,199 @@
+/* ProductDetailBox */
+.productDetailBox {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  margin-bottom: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.leftHeader {
+  display: flex;
+  align-items: center;
+}
+
+.tag {
+  width: 15px;
+  height: 30px;
+  background-color: #3cb371;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.titleTop {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+
+/* ProductInfo */
+.productInfoSection {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  position: relative;
+}
+
+.carouselImage {
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.navButton {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 0 12px;
+  color: #333;
+  transition: color 0.2s;
+}
+
+.metabox {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  width: 600px;
+  height: 300px;
+  margin-left:30px;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.productName {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  color: #222;
+}
+
+.category {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.category span {
+  color: #000;
+  font-weight: 500;
+}
+
+.point {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #e64545;
+}
+
+.extraInfo {
+  font-size: 0.95rem;
+  color: #888;
+}
+
+.extraInfo p {
+  margin: 4px 0;
+}
+
+.extraInfo span {
+  font-weight: 500;
+  color: #333;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1); /* 흐릿한 회색 */
+  width: 90%; /* 너비 조절 */
+  margin: 24px auto; /* 상하 여백, 가운데 정렬 */
+}
+
+
+/* Inspector */
+.ins{
+    width:100%;
+}
+.inspectionBox {
+    padding: 24px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    margin:0 auto;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    width:85%;
+}
+
+.inspectionTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.inspectionContent {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+.inspectionContent p {
+  margin: 8px 0;
+}
+
+.inspectionContent span {
+  font-weight: 500;
+  color: #222;
+}
+
+.grade {
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 6px;
+  color: #2e7d32;
+  background-color: #e0f2f1;
+}
+
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top:40px;
+}
+
+.footer button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.footer button:hover {
+  background-color: #0056b3;
+}
