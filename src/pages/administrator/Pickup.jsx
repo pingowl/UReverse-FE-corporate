@@ -1,7 +1,15 @@
 import React from 'react';
+import PickupBox from '../../component/administrator/Pickup/PickupBox';
 
 const Pickup = () => {
-  return <h2>수거관리 페이지입니다</h2>;
+  return <div
+      style={{
+        padding: 24,
+        boxSizing: 'border-box',
+      }}
+    >
+      <PickupBox/>
+    </div>
 };
 
 export default Pickup;

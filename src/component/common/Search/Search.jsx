@@ -1,6 +1,6 @@
 import React from 'react';
 import { FiSearch } from 'react-icons/fi';
-import styles from './Header.module.css';
+import styles from './Seach.module.css';
 
 const Search = () => {
   return (

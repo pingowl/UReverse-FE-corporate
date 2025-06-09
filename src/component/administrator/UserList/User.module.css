@@ -1,0 +1,80 @@
+/* UserBox */
+.userBox {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  margin-bottom: 24px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.leftHeader {
+  display: flex;
+  align-items: center;
+  margin-right:20px;
+}
+
+.tag {
+  width: 15px;
+  height: 30px;
+  background-color: #3cb371;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.titleTop {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.table{
+  width:100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+}
+
+.table th,
+.table td{
+  text-align:center;
+  padding: 14px 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.table th {
+  background-color: #f7f7f7;
+  color: #555;
+  font-weight: 600;
+}
+
+.table td img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+
+.row {
+  text-align: center;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.salesBox {
+  display: inline-block;
+  padding: 4px 10px;
+  background-color: #f2faff;
+  color: #0077b6;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+}
