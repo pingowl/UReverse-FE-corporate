@@ -1,0 +1,103 @@
+/* 헤더(Header) */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 48px;
+  background-color: #fcfcfc;
+  box-shadow: rgb(244, 244, 244) 1px 0px 0px inset,
+              rgb(239, 239, 239) 0px -1px 0px inset;
+}
+
+/* 검색 바(Search) */
+.searchWrapper {
+  position: relative;
+  width: 400px;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  color: #999;
+  font-size: 20px;
+  pointer-events: none;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 24px 12px 44px; 
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #1b75bc; 
+  box-shadow: 0 0 5px rgba(27, 117, 188, 0.5);
+}
+
+/* 이름(UserDropdown) */
+.userSection {
+  position: relative;
+}
+
+.userButton {
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #333;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: none;
+}
+.userButton.inspectorHover:hover {
+  background-color: #f5a623; /* 노란색 계열 */
+  color: white;
+  box-shadow: 0 2px 8px rgba(245, 166, 35, 0.4);
+}
+
+
+.userButton:hover {
+  background-color: #77bfa3;
+  color: white;
+  box-shadow: 0 2px 8px rgba(119, 191, 163, 0.4);
+}
+.dropdown {
+  position: absolute;
+  top: 48px;
+  right: 0;
+   background-color: #fff;
+  border: 1px solid #cce3d8;
+  border-radius: 12px;
+   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  min-width: 140px;
+  z-index: 20;
+}
+
+.dropdownItem {
+  display: block;
+  padding: 12px 20px;
+  color: #3a3a3a;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  border-radius: 8px;
+}
+
+.dropdownItem:hover {
+  background-color: #77bfa3;
+  color: #fff;
+}
+
+.dropdownItem.inspectorHover:hover {
+  background-color: #f5a623;
+  color: #fff;
+}

@@ -1,0 +1,127 @@
+/* (상단) 요약 박스(Summary Box) */
+.summaryBox {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  margin-bottom: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.leftHeader {
+  display: flex;
+  align-items: center;
+}
+
+.tag {
+  width: 15px;
+  height: 30px;
+  background-color: #3cb371;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.titleTop {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.datepicker {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+.datepicker:hover{
+    cursor: pointer;
+}
+
+.items {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* 요약 각 아이템(Summary Item) */
+.summaryItem {
+  flex: 1;
+  text-align: center;
+  padding: 20px;
+  border-right: 1px solid #eee;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.summaryItem:hover {
+  background-color: #f5faff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+.summaryItem:last-child {
+  border-right: none;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.count {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.change {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.up {
+  color: #2ecc71;
+}
+
+.down {
+  color: #e74c3c;
+}
+
+/* (하단) 차트 박스(ChartBox) */
+.chartBox {
+  background-color: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+}
+
+.dropdown {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+}
+
+.chartPlaceholder {
+  height: 350px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 14px;
+}
