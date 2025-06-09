@@ -1,5 +1,5 @@
-/* ProductBox */
-.productBox {
+/* PickupBox */
+.pickupBox {
   background: white;
   padding: 24px;
   border-radius: 12px;
@@ -33,9 +33,123 @@
   color: #333;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-bottom: 30px;
+.table{
+  width:100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+}
+
+.table th,
+.table td{
+  text-align:center;
+  padding: 14px 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.table th {
+  background-color: #f7f7f7;
+  color: #555;
+  font-weight: 600;
+}
+
+.table td img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* PickupItem */
+.gradeBox {
+  display: inline-block;
+  width:30px;
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #444;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.grade_S {
+  background-color: #d0f0fd; 
+  color: #036; 
+}
+
+.grade_A {
+  background-color: #d3f9d8; 
+  color: #2e7d32;
+}
+
+.grade_B {
+  background-color: #fff3cd; 
+  color: #856404;
+}
+
+.grade_C {
+  background-color: #f8d7da; 
+  color: #721c24;
+}
+
+/* PickupProgress */
+.progressContainer {
+  width: 100%;
+  padding: 15px 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.steps {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; 
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: default;
+  user-select: none;
+  background-color: pu;
+  flex: 0 0 80px;
+}
+
+.circle {
+  width: 40px;
+  height: 40px;
+  background-color: #ccc;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.label {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #666;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.active .circle {
+  background-color: #4caf50;
+  box-shadow: 0 0 8px #4caf5088;
+  color: white;
+}
+
+.active .label {
+  color: #4caf50;
+  font-weight: 600;
 }
