@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import ProductItem from './ProductItem';
+import Search from '../../common/Search/Search';
 import Pagination from '../../common/Pagination/Pagination';
-import styles from './Product.module.css';
+import styles from './Pickup.module.css';
 
 // 예시 데이터
 const dummyProducts = [
@@ -57,7 +57,7 @@ const dummyProducts = [
   
 ];
 
-const ProductBox = () => {
+const PickupBox = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
@@ -72,15 +72,16 @@ const ProductBox = () => {
       <div className={styles.header}>
         <div className={styles.leftHeader}>
           <div className={styles.tag} />
-          <h2 className={styles.titleTop}>상품 목록</h2>
+          <h2 className={styles.titleTop}>수거 관리</h2>
         </div>
+        <Search/>
       </div>
 
-      <div className={styles.grid}>
+      {/* <div className={styles.grid}>
         {currentItems.map((product) => (
           <ProductItem key={product.id} {...product} />
         ))}
-      </div>
+      </div> */}
 
        <Pagination
         currentPage={currentPage}
@@ -91,4 +92,4 @@ const ProductBox = () => {
   );
 };
 
-export default ProductBox;
+export default PickupBox;

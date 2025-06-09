@@ -1,0 +1,41 @@
+/* ProductBox */
+.productBox {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  margin-bottom: 24px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.leftHeader {
+  display: flex;
+  align-items: center;
+  margin-right:20px;
+}
+
+.tag {
+  width: 15px;
+  height: 30px;
+  background-color: #3cb371;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.titleTop {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 30px;
+}
