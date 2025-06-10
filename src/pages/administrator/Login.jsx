@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Login = () => {
-  return <h2>(관리자)로그인 페이지입니다</h2>;
+  return <h2>로그인 페이지입니다</h2>;
 };
 
 export default Login;

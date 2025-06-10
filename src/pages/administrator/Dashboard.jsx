@@ -8,7 +8,6 @@ const Dashboard = () => {
       style={{
         padding: 24,
         boxSizing: 'border-box',
-
       }}
     >
       <SummaryBox />
