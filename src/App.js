@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Login from './pages/administrator/Login';
+import AdminLogin from './pages/administrator/Login';
+import InspectorLogin from './pages/inspector/Login';
+
 import Layout from './component/common/Layout';
 import Dashboard from './pages/administrator/Dashboard';
 import Product from './pages/administrator/Product';
@@ -17,7 +19,8 @@ function App() {
     <Router>
       <Routes>
          {/* 로그인 페이지는 레이아웃 없이 */}
-        <Route path="/login" element={<Login />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/inspector/login" element={<InspectorLogin />} />
 
         {/* administrator */}
         <Route path="/admin" element={<Layout role="admin" />}>
