@@ -17,10 +17,18 @@ const dummyProduct = [
         date: '2025-06-01',
     },
     result:{
+      ai:{
+        stain: false,
+        tear: false,
+        Stretching: true,
+        Fading: false
+      },
+      inspector:{
         inspectorId: "inspector001@naver.com",
-        comment: "오케이 굳",
-        grade: "A",
-    }
+        comment: "오케이 굳, 늘어남 정도가 심하지 않습니다. 거의 새옷이네요.",
+      },
+      grade: "A",
+    },
     
   },
 ]
