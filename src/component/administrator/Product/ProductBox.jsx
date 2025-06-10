@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ProductItem from './ProductItem';
+import Search from '../../common/Search/Search';
 import Pagination from '../../common/Pagination/Pagination';
 import styles from './Product.module.css';
 
@@ -74,6 +75,7 @@ const ProductBox = () => {
           <div className={styles.tag} />
           <h2 className={styles.titleTop}>상품 목록</h2>
         </div>
+        <Search/>
       </div>
 
       <div className={styles.grid}>

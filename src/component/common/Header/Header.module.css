@@ -1,43 +1,12 @@
 /* 헤더(Header) */
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content:end;
   align-items: center;
   padding: 18px 48px;
   background-color: #fcfcfc;
   box-shadow: rgb(244, 244, 244) 1px 0px 0px inset,
               rgb(239, 239, 239) 0px -1px 0px inset;
-}
-
-/* 검색 바(Search) */
-.searchWrapper {
-  position: relative;
-  width: 400px;
-}
-
-.searchIcon {
-  position: absolute;
-  top: 50%;
-  left: 16px;
-  transform: translateY(-50%);
-  color: #999;
-  font-size: 20px;
-  pointer-events: none;
-}
-
-.input {
-  width: 100%;
-  padding: 12px 24px 12px 44px; 
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  font-size: 16px;
-  transition: border-color 0.3s ease;
-}
-
-.input:focus {
-  outline: none;
-  border-color: #1b75bc; 
-  box-shadow: 0 0 5px rgba(27, 117, 188, 0.5);
 }
 
 /* 이름(UserDropdown) */
