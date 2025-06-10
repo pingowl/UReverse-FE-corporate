@@ -1,10 +1,17 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import PickupProgress from './PickupProgress';
 import styles from './Pickup.module.css';
-
+ 
 const PickupItem = ({ product }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/admin/pickup/${product.id}`);
+  };
+
   return (
-    <tr className={styles.row}>
+    <tr className={styles.row} onClick={handleClick}>
       <td>
         {product.image ? (
           <img src={product.image} alt={product.brand} className={styles.image} />

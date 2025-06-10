@@ -7,6 +7,7 @@ import Dashboard from './pages/administrator/Dashboard';
 import Product from './pages/administrator/Product';
 import ProductDetail from './pages/administrator/ProductDetail';
 import Pickup from './pages/administrator/Pickup';
+import PickupDetail from './pages/administrator/PickupDetail';
 import User from './pages/administrator/User';
 
 import Waiting from './pages/inspector/Waiting';
@@ -25,6 +26,7 @@ function App() {
           <Route path="product" element={<Product />} />
           <Route path="products/:id" element={<ProductDetail />} />
           <Route path="pickup" element={<Pickup />} />
+          <Route path="pickup/:id" element={<PickupDetail/>}/>
           <Route path="user" element={<User />} />
         </Route>
 

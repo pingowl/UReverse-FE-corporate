@@ -14,7 +14,7 @@ const dummyProducts = [
     grade: 'S',
     point: 10000,
     date: '2025-06-01',
-    state: 'REGISTER',
+    state: 'FINISH',
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ const dummyProducts = [
     grade: 'A',
     point: 13000,
     date: '2025-06-02',
-    state: 'FINISHED',
+    state: 'DELIVERY_REQUEST',
   },
   {
     id: 3,
@@ -34,7 +34,7 @@ const dummyProducts = [
     grade: 'A',
     point: 11000,
     date: '2025-06-03',
-    state: 'FIRST_INSPECTED',
+    state: 'SECOND_INSPECT',
   },
   {
     id: 4,
@@ -44,7 +44,7 @@ const dummyProducts = [
     grade: 'S',
     point: 15000,
     date: '2025-06-01',
-    state: 'FIRST_INSPECTED',
+    state: 'FIRST_INSPECT',
   },
   {
     id: 5,
@@ -54,7 +54,7 @@ const dummyProducts = [
     grade: 'S',
     point: 10000,
     date: '2025-06-01',
-    state: 'Register',
+    state: 'REGISTER',
   },
   {
     id: 6,
@@ -64,7 +64,7 @@ const dummyProducts = [
     grade: 'C',
     point: 1000,
     date: '2025-06-01',
-    state: 'DELIVERING',
+    state: 'FIRST_INSPECT',
   },
   {
     id: 7,
@@ -74,7 +74,7 @@ const dummyProducts = [
     grade: 'S',
     point: 20000,
     date: '2025-06-01',
-    state: 'Register',
+    state: 'REGISTER',
   },
   
 ];
