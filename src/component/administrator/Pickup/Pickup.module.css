@@ -62,37 +62,46 @@
 
 /* PickupItem */
 .gradeBox {
+  font-weight: 800;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 1.1rem;
   display: inline-block;
-  width:30px;
-  padding: 4px 10px;
-  border-radius: 10px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #444;
-  background-color: #f0f0f0;
-  border: 1px solid #ddd;
-  text-align: center;
 }
 
 .grade_S {
-  background-color: #d0f0fd; 
-  color: #036; 
+  background: linear-gradient(135deg, #ffe082, #ffd54f);
+  color: #4e342e;
+  border: none;
+  box-shadow: 0 2px 4px rgba(255, 215, 0, 0.4);
+  font-weight: 700;
 }
 
 .grade_A {
-  background-color: #d3f9d8; 
-  color: #2e7d32;
+  background: linear-gradient(135deg, #b2dfdb, #80cbc4);
+  color: #004d40;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 150, 136, 0.2);
+  font-weight: 600;
 }
 
 .grade_B {
-  background-color: #fff3cd; 
-  color: #856404;
+  background: linear-gradient(135deg, #fff59d, #fdd835);
+  color: #795548;
+  border: none;
+  box-shadow: 0 2px 4px rgba(255, 235, 59, 0.3);
+  font-weight: 500;
 }
 
 .grade_C {
-  background-color: #f8d7da; 
-  color: #721c24;
+  background: linear-gradient(135deg, #ffe082, #fbc02d);
+  color: #6d4c41;
+  border: none;
+  box-shadow: 0 2px 4px rgba(255, 202, 40, 0.25);
+  font-weight: 500;
 }
+
+
 
 /* PickupProgress */
 .progressContainer {
