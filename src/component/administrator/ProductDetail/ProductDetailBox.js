@@ -6,6 +6,7 @@ import Button from '../../common/Button/Button';
 
 const ProductDetailBox = ({ productData }) => {
   const { product, result } = productData;
+  const status = product.status;
 
   return (
     <div className={styles.productDetailBox}>
@@ -22,7 +23,7 @@ const ProductDetailBox = ({ productData }) => {
 
       {/* 검수 결과 */}
       <div className={styles.ins}>
-        <InspectionResult result={result}/>
+        <InspectionResult result={result} status={status} />
       </div>
       
 
