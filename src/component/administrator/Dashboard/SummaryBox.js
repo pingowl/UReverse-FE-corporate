@@ -30,6 +30,7 @@ const SummaryBox = () => {
         {summaryData.map((item, idx) => (
           <SummaryItem key={idx} {...item} />
         ))}
+      {/* 수거 요청 들어온 대시보드 추가하기 */}
       </div>
     </div>
   );

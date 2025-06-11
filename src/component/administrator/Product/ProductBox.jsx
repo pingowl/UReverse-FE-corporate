@@ -9,55 +9,62 @@ const dummyProducts = [
   {
     id: 1,
     image: 'https://cdn.hellodd.com/news/photo/201909/69577_craw1.jpg',
-    name: '상품 A',
-    price: 10000,
+    brand: '브랜드A',
+    category: '카테고리A',
+    grade: "A",
     date: '2025-06-01',
   },
   {
     id: 2,
     image: 'https://flexible.img.hani.co.kr/flexible/normal/970/710/imgdb/original/2022/0107/20220107501703.jpg',
-    name: '상품 B',
-    price: 12000,
+    brand: '브랜드B',
+    category: '카테고리B',
+    grade: "B",
     date: '2025-06-02',
   },
   {
     id: 3,
     image: '',
-    name: '상품 C',
-    price: 13000,
+    brand: '브랜드C',
+    category: '카테고리C',
+    grade: "S",
     date: '2025-06-03',
   },
   {
     id: 4,
     image: '',
-    name: '상품 D',
-    price: 15000,
+    brand: '브랜드D',
+    category: '카테고리D',
+    grade: "A",
     date: '2025-06-04',
   },
   {
     id: 5,
     image: '',
-    name: '상품 E',
-    price: 16000,
+    brand: '브랜드E',
+    category: '카테고리E',
+    grade: "A",
     date: '2025-06-05',
   },
   {
     id: 6,
     image: '',
-    name: '상품 F',
-    price: 17000,
+    brand: '브랜드F',
+    category: '카테고리F',
+    grade: "F",
     date: '2025-06-06',
   },
   {
     id: 7,
     image: '',
-    name: '상품 G',
-    price: 11000,
+    brand: '브랜드G',
+    category: '카테고리G',
+    grade: "A",
     date: '2025-06-06',
   },
   
 ];
-
+ 
 const ProductBox = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
