@@ -36,7 +36,7 @@ const ProductInfo = ({ product }) => {
           {/* paid_point(실제 지급한 포인트) 옆에 expect_point(예상 포인트) 작게 표시 */}
           <div className={styles.pointBox}>
             <span className={styles.point}>
-              {product.paid_point.toLocaleString()} P
+              {product.paid_point != null ? `${product.paid_point.toLocaleString()} P` : ' - '}
             </span>
             {product.expect_point && (
               <span className={styles.expectPoint}>

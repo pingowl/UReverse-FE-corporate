@@ -26,7 +26,7 @@ const PickupItem = ({ product }) => {
           {product.grade}
         </span>
       </td>
-      <td>{product.point.toLocaleString()} P</td>
+      <td>{product.paid_point != null ? `${product.paid_point.toLocaleString()} P` : ' - '}</td>
       <td>{product.date}</td>
       <td style={{maxWidth: '300px', minWidth: '140px'}}>
         <PickupProgress currentState={product.state.toUpperCase()} />
