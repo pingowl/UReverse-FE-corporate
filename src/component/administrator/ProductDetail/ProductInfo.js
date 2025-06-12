@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import styles from './ProductDetail.module.css';
 
 const ProductInfo = ({ product }) => {
-  const images = [product.image1, product.image2].filter(Boolean);
+  const images = [product.image1, product.image2, product.image3].filter(
+    (url) => typeof url === 'string' && url.trim() !== '' && url !== 'null'
+  );
   const [currentIdx, setCurrentIdx] = useState(0);
 
   const nextImage = () => {
@@ -36,7 +38,7 @@ const ProductInfo = ({ product }) => {
           {/* paid_point(실제 지급한 포인트) 옆에 expect_point(예상 포인트) 작게 표시 */}
           <div className={styles.pointBox}>
             <span className={styles.point}>
-              {product.paid_point.toLocaleString()} P
+              {product.paid_point != null ? `${product.paid_point.toLocaleString()} P` : ' - '}
             </span>
             {product.expect_point && (
               <span className={styles.expectPoint}>
@@ -47,8 +49,8 @@ const ProductInfo = ({ product }) => {
 
           {/* 기타 정보 */}
           <div className={styles.extraInfo}>
-            <p>등록자: <span>{product.userId}</span></p>
-            <p>등록일: <span>{product.date}</span></p>
+            <p>판매자: <span>{product.userId}</span></p>
+            <p>상품 수거일: <span>{product.date}</span></p>
           </div>
         </div>
       </div>

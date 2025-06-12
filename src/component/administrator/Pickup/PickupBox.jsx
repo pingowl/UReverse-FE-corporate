@@ -12,7 +12,7 @@ const dummyProducts = [
     brand: '브랜드 A',
     category: '카테고리 A',
     grade: 'S',
-    point: 10000,
+    paid_point: 10000,
     date: '2025-06-01',
     state: 'FINISH',
   },
@@ -22,7 +22,7 @@ const dummyProducts = [
     brand: '브랜드 B',
     category: '카테고리 B',
     grade: 'A',
-    point: 13000,
+    paid_point: 13000,
     date: '2025-06-02',
     state: 'DELIVERY_REQUEST',
   },
@@ -32,7 +32,7 @@ const dummyProducts = [
     brand: '브랜드 C',
     category: '카테고리 C',
     grade: 'A',
-    point: 11000,
+    paid_point: 11000,
     date: '2025-06-03',
     state: 'SECOND_INSPECT',
   },
@@ -42,7 +42,7 @@ const dummyProducts = [
     brand: '브랜드 D',
     category: '카테고리 D',
     grade: 'S',
-    point: 15000,
+    paid_point: null,
     date: '2025-06-01',
     state: 'FIRST_INSPECT',
   },
@@ -52,7 +52,7 @@ const dummyProducts = [
     brand: '브랜드 E',
     category: '카테고리 E',
     grade: 'S',
-    point: 10000,
+    paid_point: null,
     date: '2025-06-01',
     state: 'REGISTER',
   },
@@ -62,7 +62,7 @@ const dummyProducts = [
     brand: '브랜드 F',
     category: '카테고리 F',
     grade: 'C',
-    point: 1000,
+    paid_point: null,
     date: '2025-06-01',
     state: 'FIRST_INSPECT',
   },
@@ -72,7 +72,7 @@ const dummyProducts = [
     brand: '브랜드 G',
     category: '카테고리 G',
     grade: 'S',
-    point: 20000,
+    paid_point: null,
     date: '2025-06-01',
     state: 'REGISTER',
   },
@@ -106,7 +106,7 @@ const PickupBox = () => {
             <th>브랜드</th>
             <th>카테고리</th>
             <th>등급</th>
-            <th>포인트</th>
+            <th>지급포인트</th>
             <th>날짜</th>
             <th>진행 상태</th>
           </tr>
