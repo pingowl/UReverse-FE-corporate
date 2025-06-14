@@ -22,7 +22,7 @@
 .tag {
   width: 15px;
   height: 30px;
-  background-color: #FFD43B;
+  background-color: #ffd43b;
   border-radius: 4px;
   margin-right: 10px;
 }
@@ -40,7 +40,6 @@
   margin-bottom: 30px;
 }
 
-
 /* ProductItem(각 상품 카드) */
 .productItem {
   border: 1px solid #eee;
@@ -52,7 +51,7 @@
 
 .productItem:hover {
   transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .imageBox {
@@ -82,13 +81,19 @@
   margin-bottom: 8px;
 }
 
-.price{
-    width:70px;
-    height: 26px;
-    display: flex;
-    justify-content: center;
-    border-radius: 10px;
-    background-color: #FFF3B0;
+.name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* 너무 길면 ... 처리 */
+}
+
+.price {
+  width: 70px;
+  height: 26px;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: #fff3b0;
 }
 
 .dateRow {
@@ -96,6 +101,9 @@
   align-items: center;
   font-size: 14px;
   color: #888;
+  white-space: nowrap; /* 줄바꿈 방지 */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .clockIcon {
