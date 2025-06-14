@@ -17,4 +17,77 @@ instance.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+// Refresh Token 로직
+let isRefreshing = false;
+let refreshSubscribers = [];
+
+function onRefreshed(token) {
+  refreshSubscribers.forEach((cb) => cb(token));
+  refreshSubscribers = [];
+}
+
+function addRefreshSubscriber(cb) {
+  refreshSubscribers.push(cb);
+}
+
+// 응답 인터셉터: 403 처리 및 refresh
+instance.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+    const path = window.location.pathname;
+
+    // 403이면서 로그인 페이지가 아닐 때
+    if (
+      error.response &&
+      error.response.status === 403 &&
+      !originalRequest._retry &&
+      !/^\/(admin|inspector)\/login/.test(path)
+    ) {
+      // accessToken 삭제 (만료로 간주)
+      localStorage.removeItem('accessToken');
+      originalRequest._retry = true;
+
+      // refreshToken 재발급 시도
+      if (!isRefreshing) {
+        isRefreshing = true;
+        try {
+          // refresh 요청
+          const res = await axios.get('/api/v1/auth/refresh', {
+            withCredentials: true,
+          });
+          const newAccessToken = res.data.response.accessToken;
+          localStorage.setItem('accessToken', newAccessToken);
+          instance.defaults.headers[
+            'Authorization'
+          ] = `Bearer ${newAccessToken}`;
+          onRefreshed(newAccessToken);
+        } catch (e) {
+          // refresh도 실패하면 로그인 페이지로 이동
+          if (path.startsWith('/admin')) {
+            window.location.href = '/admin/login';
+          } else if (path.startsWith('/inspector')) {
+            window.location.href = '/inspector/login';
+          } else {
+            window.location.href = '/login';
+          }
+          return Promise.reject(e);
+        } finally {
+          isRefreshing = false;
+        }
+      }
+      // refresh 완료까지 대기
+      return new Promise((resolve) => {
+        addRefreshSubscriber((token) => {
+          originalRequest.headers['Authorization'] = `Bearer ${token}`;
+          resolve(instance(originalRequest));
+        });
+      });
+    }
+
+    // 로그인 페이지이거나 기타 에러는 그대로
+    return Promise.reject(error);
+  }
+);
+
 export default instance;
