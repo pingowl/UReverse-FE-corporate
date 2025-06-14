@@ -67,6 +67,7 @@
   margin-top: 20px;
 }
 
+/* 등급 */
 .grade-row {
   display: flex;
   gap: 12px;
@@ -93,6 +94,7 @@
 .grade-radio {
   margin-right: 6px;
   accent-color: #ffe066;
+  display: none;
 }
 
 .submit-btn,
