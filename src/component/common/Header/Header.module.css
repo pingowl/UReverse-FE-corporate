@@ -1,12 +1,12 @@
 /* 헤더(Header) */
 .header {
   display: flex;
-  justify-content:end;
+  justify-content: end;
   align-items: center;
   padding: 18px 48px;
   background-color: #fcfcfc;
   box-shadow: rgb(244, 244, 244) 1px 0px 0px inset,
-              rgb(239, 239, 239) 0px -1px 0px inset;
+    rgb(239, 239, 239) 0px -1px 0px inset;
 }
 
 /* 이름(UserDropdown) */
@@ -32,7 +32,6 @@
   box-shadow: 0 2px 8px rgba(245, 166, 35, 0.4);
 }
 
-
 .userButton:hover {
   background-color: #77bfa3;
   color: white;
@@ -42,10 +41,10 @@
   position: absolute;
   top: 48px;
   right: 0;
-   background-color: #fff;
+  background-color: #fff;
   border: 1px solid #cce3d8;
   border-radius: 12px;
-   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
   min-width: 140px;
   z-index: 20;
 }
