@@ -74,6 +74,7 @@
 .grade-radio {
   margin-right: 6px;
   accent-color: #ffe066;
+  display: none; /* 기본 동그라미 제거 */
 }
 
 .submit-btn,

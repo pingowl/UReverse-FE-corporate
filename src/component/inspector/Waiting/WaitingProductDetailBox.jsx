@@ -11,6 +11,7 @@ import {
 import { loadWaitingProductForm } from '../../../utils/localStorageUtils';
 import InspectionForm from './form/InspectionForm';
 import ImageModal from '../../common/ImageModal/ImageModal';
+import LastSavedIndicator from '../../common/LastSavedIndicator';
 
 const WaitingProductDetailBox = () => {
   const { id } = useParams();
@@ -145,26 +146,14 @@ const WaitingProductDetailBox = () => {
   return (
     <div className={styles['detail-container']}>
       <SectionHeader title="검수 대기 상품 상세">
-        <span className={styles['detail-save-time']}>
-          <span
-            role="img"
-            aria-label="저장됨"
-            style={{ marginRight: 4, color: 'gray' }}
-          >
-            <IoCheckmarkDoneSharp />
-          </span>
-          마지막 저장&nbsp;
-          <b>
-            {lastSaved
-              ? new Date(lastSaved).toLocaleString()
-              : product.aiInspection?.createdAt}
-          </b>
-        </span>
+        <LastSavedIndicator
+          lastSaved={lastSaved}
+          fallbackDate={product.aiInspection?.createdAt}
+        />
       </SectionHeader>
 
       <ProductInfoSection product={product} setModalImg={setModalImg} />
 
-      {/* 검수 입력 폼 */}
       <InspectionForm
         form={form}
         onChange={handleChange}
@@ -175,11 +164,6 @@ const WaitingProductDetailBox = () => {
         discountedPoint={discountedPoint}
         navigate={navigate}
       />
-
-      {/* 이미지 팝업 */}
-      {modalImg && (
-        <ImageModal src={modalImg} onClose={() => setModalImg(null)} />
-      )}
     </div>
   );
 };
