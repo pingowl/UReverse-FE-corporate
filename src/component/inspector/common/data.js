@@ -1,13 +1,5 @@
-import React, { useState } from 'react';
-import styles from './ProductInfoSection.module.css';
-import ImageModal from '../../common/ImageModal/ImageModal';
-import ProductImages from '../common/ProductImages';
-import ProductDetails from '../common/ProductDetails';
-import AiInspectionResult from '../common/AiInspectionResult';
-import InspectionCriteria from '../common/InspectionCriteria';
-
 // 하자 항목 정의
-const DEFECTS = [
+export const DEFECTS = [
   { key: 'hasStain', label: '얼룩', emoji: '🧼' },
   { key: 'isTorn', label: '찢김', emoji: '🩹' },
   { key: 'hasFading', label: '변색', emoji: '🎨' },
@@ -16,7 +8,7 @@ const DEFECTS = [
 ];
 
 // 검수 기준 표 데이터
-const CRITERIA = [
+export const CRITERIA = [
   {
     grade: 'S',
     desc: '미사용/새상품급',
@@ -53,17 +45,3 @@ const CRITERIA = [
     color: '#c0392b',
   },
 ];
-
-export default function ProductInfoSection({ product }) {
-  const ai = product.aiInspection;
-  const [modalImg, setModalImg] = useState(null);
-
-  return (
-    <section>
-      <ProductImages imageUrls={product.imageUrls} />
-      <ProductDetails product={product} />
-      <AiInspectionResult ai={product.aiInspection} />
-      <InspectionCriteria />
-    </section>
-  );
-}
