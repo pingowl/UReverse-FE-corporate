@@ -1,16 +1,88 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './PickupDetail.module.css';
 import ProductInfo from './ProductInfo';
 import InspectionResult from './InspectionResult';
 import DeliveryInfo from './DeliveryInfo';
 import StatusNotice from './StatusNotice';
 import Button from '../../common/Button/Button';
+import { fetchPickupProductDetail } from '../../../api/administrator/fetchPickupProductDetail';
+import { fetchRegisterPickup } from '../../../api/administrator/fetchRegisterPickup';
 
-const PickupDetailBox = ({ productData }) => {
-  const { product, result, delivery } = productData;
-  const status = product.status;
+const PickupDetailBox = ({ productId }) => {
+  const [detail, setDetail] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [registering, setRegistering] = useState(false);  // 수거 등록 중 상태
+  const [registerError, setRegisterError] = useState(null); // 등록 오류
 
-   const renderStatusNotice = () => {
+  useEffect(() => {
+    if (!productId) return;
+
+    const getPickupDetail = async () => {
+      setLoading(true);
+
+      try {
+        const res = await fetchPickupProductDetail(productId);
+        if (res.success) {
+          setDetail(res.response);
+          setError(null);
+        } else {
+          setError(res.error || '상품 상세 정보를 불러오는 데 실패했습니다.');
+        }
+      } catch (err) {
+        setError('API 호출 중 오류가 발생했습니다.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getPickupDetail();
+  }, [productId]);
+  const handleRegisterPickup = async () => {
+    setRegistering(true);
+    setRegisterError(null);
+    try {
+      const res = await fetchRegisterPickup(productId);
+      if (res.success) {
+        alert('수거 등록이 완료되었습니다.');
+        const refreshed = await fetchPickupProductDetail(productId);
+        if (refreshed.success) setDetail(refreshed.response);
+      } else {
+        setRegisterError(res.error);
+      }
+    } catch (err) {
+      setRegisterError('수거 등록 중 오류가 발생했습니다.');
+    } finally {
+      setRegistering(false);
+    }
+  };
+
+
+  if (loading) {
+    return <div className={styles.pickupDetailBox}>로딩 중...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className={styles.pickupDetailBox}>
+        <p style={{ color: 'red' }}>{error}</p>
+        <Button text="← 뒤로가기" color="secondary" onClick={() => window.history.back()} />
+      </div>
+    );
+  }
+
+  if (!detail) return null;
+
+  const { product = {}, aiResult = {}, inspectorResult = {}, delivery = {}, grade = null } = detail;
+  const status = product.status || '';
+
+  const result = {
+    ai: aiResult,
+    inspector: inspectorResult,
+    grade: grade,
+  };
+
+  const renderStatusNotice = () => {
     switch (status) {
       case 'FINISH':
         return <StatusNotice text="수거가 완료되었습니다." />;
@@ -26,7 +98,6 @@ const PickupDetailBox = ({ productData }) => {
     }
   };
 
-
   return (
     <div className={styles.pickupDetailBox}>
       <div className={styles.header}>
@@ -34,43 +105,38 @@ const PickupDetailBox = ({ productData }) => {
           <div className={styles.tag} />
           <h2 className={styles.titleTop}>상품 상세 조회</h2>
         </div>
-        
       </div>
-      {/* 상태 안내 메시지 */}
-      {renderStatusNotice()}<br/><br/>
-      
 
-      {/* 공통: 상품 정보 */}
+      {renderStatusNotice()}
+      <br /><br />
+
       <ProductInfo product={product} />
       <hr />
 
-      {/* 검수 결과*/}
       <InspectionResult result={result} status={status} />
       <hr />
-
 
       <DeliveryInfo delivery={delivery} />
       <hr />
 
-      {/* 수거 요청 버튼 */}
-      {(status === 'SECOND_INSPECT') && (
+      {status === 'SECOND_INSPECT' && (
         <div className={styles.delivery_button_container}>
-          <button className={styles.delivery_button}>수거 등록</button>
+          <button
+            className={styles.delivery_button}
+            onClick={handleRegisterPickup}
+            disabled={registering}
+          >
+            {registering ? '등록 중...' : '수거 등록'}
+          </button>
+          {registerError && <p style={{ color: 'red', marginTop: '8px' }}>{registerError}</p>}
         </div>
       )}
 
-
-      {/* 하단 버튼 */}
       <div className={styles.footer}>
-        <Button
-          text="← 뒤로가기"
-          color="secondary"
-          onClick={() => window.history.back()}
-        />
+        <Button text="← 뒤로가기" color="secondary" onClick={() => window.history.back()} />
       </div>
     </div>
   );
 };
 
 export default PickupDetailBox;
-

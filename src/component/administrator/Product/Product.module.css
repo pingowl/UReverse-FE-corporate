@@ -148,3 +148,15 @@
   margin-right: 6px;
   font-size: 14px;
 }
+
+/* 필터링 */
+.filters {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.filters select {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}

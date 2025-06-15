@@ -162,3 +162,15 @@
   color: #4caf50;
   font-weight: 600;
 }
+
+/* 필터링 */
+.filters {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.filters select {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}

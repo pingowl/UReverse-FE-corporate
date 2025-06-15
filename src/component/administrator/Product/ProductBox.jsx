@@ -1,79 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductItem from './ProductItem';
-import Search from '../../common/Search/Search';
 import Pagination from '../../common/Pagination/Pagination';
 import styles from './Product.module.css';
+import { fetchFinishedProducts } from '../../../api/administrator/fetchFinishedProducts';
 
-// 예시 데이터
-const dummyProducts = [
-  {
-    id: 1,
-    image: 'https://cdn.hellodd.com/news/photo/201909/69577_craw1.jpg',
-    brand: '브랜드A',
-    category: '카테고리A',
-    grade: "A",
-    date: '2025-06-01',
-  },
-  {
-    id: 2,
-    image: 'https://flexible.img.hani.co.kr/flexible/normal/970/710/imgdb/original/2022/0107/20220107501703.jpg',
-    brand: '브랜드B',
-    category: '카테고리B',
-    grade: "B",
-    date: '2025-06-02',
-  },
-  {
-    id: 3,
-    image: '',
-    brand: '브랜드C',
-    category: '카테고리C',
-    grade: "S",
-    date: '2025-06-03',
-  },
-  {
-    id: 4,
-    image: '',
-    brand: '브랜드D',
-    category: '카테고리D',
-    grade: "A",
-    date: '2025-06-04',
-  },
-  {
-    id: 5,
-    image: '',
-    brand: '브랜드E',
-    category: '카테고리E',
-    grade: "A",
-    date: '2025-06-05',
-  },
-  {
-    id: 6,
-    image: '',
-    brand: '브랜드F',
-    category: '카테고리F',
-    grade: "F",
-    date: '2025-06-06',
-  },
-  {
-    id: 7,
-    image: '',
-    brand: '브랜드G',
-    category: '카테고리G',
-    grade: "A",
-    date: '2025-06-06',
-  },
-  
-];
- 
 const ProductBox = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const [products, setProducts] = useState([]);
+  const [filters, setFilters] = useState({
+    brand: '',
+    categoryMain: '',
+    grade: '',
+  });
+  const [pageNum, setPageNum] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const pageSize = 6;
 
-  const indexOfLast = currentPage * itemsPerPage;
-  const indexOfFirst = indexOfLast - itemsPerPage;
-  const currentItems = dummyProducts.slice(indexOfFirst, indexOfLast);
+  useEffect(() => {
+    const loadProducts = async () => {
+      const res = await fetchFinishedProducts({
+        ...filters,
+        pageNum,
+        pageSize,
+      });
 
-  const totalPages = Math.ceil(dummyProducts.length / itemsPerPage);
+      if (res.success) {
+        setProducts(res.response.items);
+        setTotalPages(res.response.totalPages);
+      } else {
+        console.error(res.error || '상품 정보를 불러오는 데 실패했습니다.');
+      }
+    };
+
+    loadProducts();
+  }, [filters, pageNum]);
+
+  const handleFilterChange = (field, value) => {
+    setFilters((prev) => ({ ...prev, [field]: value }));
+    setPageNum(1); 
+  };
 
   return (
     <div className={styles.productBox}>
@@ -82,19 +46,38 @@ const ProductBox = () => {
           <div className={styles.tag} />
           <h2 className={styles.titleTop}>상품 목록</h2>
         </div>
-        <Search/>
+        <div className={styles.filters}>
+          <select onChange={(e) => handleFilterChange('brand', e.target.value)}>
+            {/* MEMBER-005 연결 예정 */}
+            <option value="">브랜드 전체</option>
+            <option value="푸마">푸마</option>
+            <option value="아디다스">아디다스</option>
+          </select>
+          <select onChange={(e) => handleFilterChange('categoryMain', e.target.value)}>
+            <option value="">카테고리 전체</option>
+            <option value="아우터">아우터</option>
+            <option value="상의">상의</option>
+          </select>
+          <select onChange={(e) => handleFilterChange('grade', e.target.value)}>
+            <option value="">등급 전체</option>
+            <option value="S">S</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="F">F</option>
+          </select>
+        </div>
       </div>
 
       <div className={styles.grid}>
-        {currentItems.map((product) => (
+        {products.map((product) => (
           <ProductItem key={product.id} {...product} />
         ))}
       </div>
 
-       <Pagination
-        currentPage={currentPage}
+      <Pagination
+        currentPage={pageNum}
         totalPages={totalPages}
-        onPageChange={setCurrentPage}
+        onPageChange={setPageNum}
       />
     </div>
   );
