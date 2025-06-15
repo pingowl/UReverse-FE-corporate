@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from '../../../axiosInstance';
 import ProductInfoSection from '../common/ProductInfoSection';
 import SectionHeader from '../../common/Header/SectionHeader';
 import styles from './ProductWaitingDetailBox.module.css';
 import { IoCheckmarkDoneSharp } from 'react-icons/io5';
+import {
+  fetchPendingProductDetail,
+  submitProductInspection,
+} from '../../../api/products';
+import { loadWaitingProductForm } from '../../../utils/localStorageUtils';
 
 const WaitingProductDetailBox = () => {
   const { id } = useParams();
@@ -20,17 +24,9 @@ const WaitingProductDetailBox = () => {
     grade: '',
   };
 
-  const [form, setForm] = useState(() => {
-    const saved = localStorage.getItem(`waitingProductForm_${id}`);
-    if (saved) {
-      try {
-        return JSON.parse(saved).form;
-      } catch {
-        // 파싱 실패 시 기본값 반환
-      }
-    }
-    return defaultForm;
-  });
+  const [form, setForm] = useState(() =>
+    loadWaitingProductForm(id, defaultForm)
+  );
   const [loading, setLoading] = useState(true);
   const [lastSaved, setLastSaved] = useState(null);
   const [modalImg, setModalImg] = useState(null);
@@ -51,8 +47,8 @@ const WaitingProductDetailBox = () => {
   useEffect(() => {
     const fetchDetail = async () => {
       try {
-        const res = await axios.get(`/inspectors/products/${id}/pending`);
-        if (res.data.success) setProduct(res.data.response);
+        const res = await fetchPendingProductDetail(id);
+        if (res.success) setProduct(res.response);
       } finally {
         setLoading(false);
       }
@@ -128,7 +124,7 @@ const WaitingProductDetailBox = () => {
     }
 
     try {
-      await axios.post('/inspectors/products/inspection', {
+      await submitProductInspection({
         productId: product.productId,
         ...form,
       });
