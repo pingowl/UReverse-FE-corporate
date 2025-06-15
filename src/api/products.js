@@ -36,3 +36,31 @@ export async function fetchProducts({ keyword, inspected, pageNum, pageSize }) {
     };
   }
 }
+
+/**
+ * 검수 대기 상품 상세 조회
+ * @param {string} productId - 상품 ID
+ * @returns {Promise<Object>} - { success, response }
+ */
+export async function fetchPendingProductDetail(productId) {
+  try {
+    const res = await axios.get(`/inspectors/products/${productId}/pending`);
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+/**
+ * 상품 검수 결과 등록
+ * @param {Object} data - 검수 결과 데이터 (productId 및 form 값 포함)
+ * @returns {Promise<Object>} - 서버 응답 데이터
+ */
+export async function submitProductInspection(data) {
+  try {
+    const res = await axios.post('/inspectors/products/inspection', data);
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+}

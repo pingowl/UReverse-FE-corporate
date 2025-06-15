@@ -12,12 +12,14 @@ import User from './pages/administrator/User';
 
 import Waiting from './pages/inspector/Waiting';
 import Finished from './pages/inspector/Finished';
+import InspectorWaitingDetail from './pages/inspector/WaitingProductDetail';
+import InspectorFinishedDetail from './pages/inspector/FinishedProductDetail';
 
 function App() {
-  return (  
+  return (
     <Router>
       <Routes>
-         {/* 로그인 페이지는 레이아웃 없이 */}
+        {/* 로그인 페이지는 레이아웃 없이 */}
         <Route path="/admin/login" element={<Login />} />
         <Route path="/inspector/login" element={<Login />} />
 
@@ -27,14 +29,16 @@ function App() {
           <Route path="product" element={<Product />} />
           <Route path="products/:id" element={<ProductDetail />} />
           <Route path="pickup" element={<Pickup />} />
-          <Route path="pickup/:id" element={<PickupDetail/>}/>
+          <Route path="pickup/:id" element={<PickupDetail />} />
           <Route path="user" element={<User />} />
         </Route>
 
         {/* Inspector */}
         <Route path="/inspector" element={<Layout role="inspector" />}>
           <Route path="waiting" element={<Waiting />} />
+          <Route path="waiting/:id" element={<InspectorWaitingDetail />} />
           <Route path="finished" element={<Finished />} />
+          <Route path="finished/:id" element={<InspectorFinishedDetail />} />
         </Route>
       </Routes>
     </Router>
