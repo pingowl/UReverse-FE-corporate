@@ -1,25 +1,47 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
 import styles from './Dashboard.module.css';
+import { fetchDashboardFinish } from '../../../api/administrator/fetchDashboardFinish';
 
-const dataMap = {
-  '7days': [
-    { baseDate: "2025-06-10", finishCount: 1 },
-    { baseDate: "2025-06-11", finishCount: 0 },
-    { baseDate: "2025-06-12", finishCount: 0 },
-    { baseDate: "2025-06-13", finishCount: 2 },
-    { baseDate: "2025-06-14", finishCount: 3 },
-  ],
-  '6months': [
-    { baseDate: "2025-05", finishCount: 1 },
-    { baseDate: "2025-06", finishCount: 3 },
-  ],
+const periodMap = {
+  '7days': 'week',
+  '1month': 'month',
+  '6months': 'halfyear',
+  '1year': 'year',
 };
 
 const ChartBox = () => {
   const [period, setPeriod] = useState('7days');
+  const [chartData, setChartData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const chartData = dataMap[period] || [];
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const apiPeriod = periodMap[period] || 'week';
+        const result = await fetchDashboardFinish(apiPeriod);
+
+        if (result.success) {
+          setChartData(result.data);
+          console.log(result.data);
+        } else {
+          setChartData([]);
+          setError('데이터를 불러오는데 실패했습니다.');
+        }
+      } catch (e) {
+        setError('서버와 통신 중 오류가 발생했습니다.');
+        setChartData([]);
+      }
+
+      setLoading(false);
+    };
+
+    loadData();
+  }, [period]);
 
   return (
     <div className={styles.chartBox}>
@@ -41,7 +63,11 @@ const ChartBox = () => {
       </div>
 
       <div className={styles.chartPlaceholder}>
-        {chartData.length === 0 ? (
+        {loading ? (
+          <div>로딩중...</div>
+        ) : error ? (
+          <div>{error}</div>
+        ) : chartData.length === 0 ? (
           <div>데이터가 없습니다.</div>
         ) : (
           <ResponsiveContainer width="100%" height={350}>
@@ -58,5 +84,4 @@ const ChartBox = () => {
     </div>
   );
 };
-
 export default ChartBox;

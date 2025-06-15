@@ -1,20 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import styles from './Dashboard.module.css';
+import { fetchDashboardSummaryPFChart } from '../../../api/administrator/fetchDashboardSummaryPFChart';
 
-const chartData = [
-  { name: '합격', value: 83.33 },
-  { name: '불합격', value: 16.67 },
-];
+const COLORS = ['#0000FF', '#FF0000'];
 
-const COLORS = [
-  '#FF0000', // 빨강
-  '#0000FF', // 파랑
-];
-
-const SummaryPFChart = () => {
+const SummaryPFChart = ({date}) => {
   const [type, setType] = useState('검수자');
-  return(
+  const [chartData, setChartData] = useState([
+    { name: 'PASS', value: 0 },
+    { name: 'FAIL', value: 0 },
+  ]);
+  const [hasData, setHasData] = useState(true);
+
+   useEffect(() => {
+    const loadChart = async () => {
+      const typeKey = type === 'AI' ? 'ai' : 'human';
+      const result = await fetchDashboardSummaryPFChart(date, typeKey);
+
+     if (result.success) {
+        if (result.totalCount === 0) {
+          setHasData(false);
+        } else {
+          setHasData(true);
+          setChartData([
+            { name: 'PASS', value: result.passRatio },
+            { name: 'FAIL', value: result.failRatio },
+          ]);
+        }
+      } else {
+        console.error('검수 통계 조회 오류:', result.error);
+        setHasData(false);
+      }
+    };
+
+    if (date) loadChart();
+  }, [date, type]);
+
+  return (
     <div className={styles.chartCard}>
       <div className={styles.cardHeader}>
         <span className={styles.subtitle}>검수 결과 통계</span>
@@ -34,31 +57,29 @@ const SummaryPFChart = () => {
         </div>
       </div>
       <div className={styles.chartDiv}>
-        <PieChart width={500} height={310}>
-          <Pie
-            data={chartData}
-            dataKey="value"     // 각 항목의 값으로 크기 계산
-            nameKey="name"      // 항목 이름 표시용
-            cx="50%"            // 차트 가로 가운데
-            cy="50%"            // 차트 세로 가운데
-            outerRadius={140}   // 반지름 120px
-            label               // 라벨 표시
-          >
-            {chartData.map((_, i) => (
-              <Cell key={i} fill={COLORS[i % COLORS.length]} />
-            ))}
-          </Pie>
-          <Tooltip/>
-          <Legend
-            layout="vertical"      // 세로 정렬
-            verticalAlign="middle"    // 수직 기준 위쪽
-            align="right"          // 수평 기준 오른쪽
-          />
-      </PieChart>
+        {hasData ? (
+          <PieChart width={500} height={310}>
+            <Pie
+              data={chartData}
+              dataKey="value"
+              nameKey="name"
+              cx="50%"
+              cy="50%"
+              outerRadius={140}
+              label
+            >
+              {chartData.map((_, i) => (
+                <Cell key={i} fill={COLORS[i % COLORS.length]} />
+              ))}
+            </Pie>
+            <Tooltip />
+            <Legend layout="vertical" verticalAlign="middle" align="right" />
+          </PieChart>
+        ) : (
+          <div className={styles.noData}>아직 데이터가 없습니다.</div> // 👈 메시지 표시
+        )}
       </div>
-      
     </div>
   );
 };
-
 export default SummaryPFChart;
