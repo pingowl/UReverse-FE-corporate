@@ -1,7 +1,11 @@
 /* 검색 바(Search) */
 .searchWrapper {
   position: relative;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
+  flex: 1 1 200px; /* flex-grow, flex-shrink, flex-basis */
+  margin-left: auto; /* 오른쪽 정렬 */
+  box-sizing: border-box;
 }
 
 .searchIcon {
@@ -16,7 +20,7 @@
 
 .input {
   width: 100%;
-  padding: 12px 24px 12px 44px; 
+  padding: 12px 24px 12px 44px;
   border: 1px solid #ccc;
   border-radius: 10px;
   font-size: 16px;
@@ -25,6 +29,13 @@
 
 .input:focus {
   outline: none;
-  border-color: #1b75bc; 
+  border-color: #1b75bc;
   box-shadow: 0 0 5px rgba(27, 117, 188, 0.5);
+}
+
+@media (max-width: 600px) {
+  .searchWrapper {
+    max-width: 100%;
+    min-width: 120px;
+  }
 }
