@@ -3,6 +3,7 @@ import DefectToggleGroup from './DefectToggleGroup';
 import GradeSelector from './GradeSelector';
 import ExpectedPointDisplay from './ExpectedPointDisplay';
 import styles from './InspectionForm.module.css';
+import Button from '../../../common/Button/Button';
 
 const InspectionForm = ({
   form,
@@ -49,17 +50,14 @@ const InspectionForm = ({
         </span>
       </div>
 
-      <div className={styles['button-row']}>
-        <button type="submit" className={styles['submit-btn']}>
-          등록
-        </button>
-        <button
+      <div className={styles.buttonRow}>
+        <Button text="등록" type="submit" color="yellow" />
+        <Button
+          text="뒤로"
           type="button"
-          className={styles['back-btn']}
           onClick={() => navigate(-1)}
-        >
-          뒤로
-        </button>
+          color="white"
+        />
       </div>
     </form>
   );

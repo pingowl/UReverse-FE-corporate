@@ -64,3 +64,18 @@ export async function submitProductInspection(data) {
     throw error;
   }
 }
+
+/**
+ * 검수 완료 상품 상세 조회
+ * @param {string} productId - 상품 ID
+ * @returns {Promise<Object>} - { success, response }
+ */
+export async function fetchInspectedProductDetail(productId) {
+  try {
+    const res = await axios.get(`/inspectors/products/${productId}/inspected`);
+    return res.data;
+  } catch (error) {
+    console.error('Failed to fetch inspected product detail:', error);
+    throw error;
+  }
+}
