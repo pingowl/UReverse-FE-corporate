@@ -59,8 +59,6 @@ const PickupBox = () => {
     };
 
     loadProducts();
-    intervalId = setInterval(loadProducts, 5000);
-    return () => clearInterval(intervalId);
   }, [filters, currentPage]);
 
   return (
