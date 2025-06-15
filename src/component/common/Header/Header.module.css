@@ -53,17 +53,23 @@
   display: block;
   padding: 12px 20px;
   color: #3a3a3a;
-  text-decoration: none;
   font-size: 14px;
   font-weight: 500;
+  background: none;
+  border: none;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
   transition: background-color 0.25s ease, color 0.25s ease;
-  border-radius: 8px;
+  font-family: inherit;
+  border-radius: 12px;
 }
 
 .dropdownItem:hover {
   background-color: #77bfa3;
   color: #fff;
 }
+
 
 .dropdownItem.inspectorHover:hover {
   background-color: #f5a623;
