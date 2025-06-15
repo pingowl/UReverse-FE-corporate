@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import styles from './Login.module.css';
 import { FaUser, FaLock } from 'react-icons/fa';
 import LoginInput from './LoginInput';
-import axios from '../../../axiosInstance';
 import { useNavigate } from 'react-router-dom';
+import { login } from '../../../api/auth';
 
 function LoginBox({ isInspector }) {
   const [id, setId] = useState('');
@@ -15,34 +15,21 @@ function LoginBox({ isInspector }) {
   const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
-    try {
-      const res = await axios.post(
-        '/auth/login',
-        {
-          email: id,
-          password: pw,
-        },
-        { withCredentials: true } // refreshToken 쿠키 수신 위해 필요
-      );
-      if (res.data.success) {
-        const { accessToken, role } = res.data.response;
-        // accessToken을 localStorage/sessionStorage에 저장
-        localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('role', role);
+    const res = await login(id, pw);
+    if (res.success) {
+      const { accessToken, role } = res.response;
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('role', role);
 
-        // role에 따라 이동
-        if (role === 'ROLE_INSPECTOR') {
-          navigate('/inspector/waiting');
-        } else if (role === 'ROLE_ADMIN') {
-          navigate('/admin');
-        } else {
-          setError('권한이 없습니다.');
-        }
+      if (role === 'ROLE_INSPECTOR') {
+        navigate('/inspector/waiting');
+      } else if (role === 'ROLE_ADMIN') {
+        navigate('/admin');
       } else {
-        setError('로그인 실패: ' + (res.data.error || ''));
+        setError('권한이 없습니다.');
       }
-    } catch (err) {
-      setError('로그인 실패: 아이디 또는 비밀번호를 확인하세요.');
+    } else {
+      setError('로그인 실패: ' + (res.error || ''));
     }
   };
 

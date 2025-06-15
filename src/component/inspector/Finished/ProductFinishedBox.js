@@ -2,10 +2,10 @@ import React, { useEffect, useState, useCallback } from 'react';
 import ProductFinishedItem from './ProductFinishedItem';
 import Pagination from '../../common/Pagination/Pagination';
 import styles from './ProductFinished.module.css';
-import axios from '../../../axiosInstance';
 import Search from '../../common/Search/Search';
 import SectionHeader from '../../common/Header/SectionHeader';
 import useDebounce from '../../../hooks/useDebounce';
+import { fetchProducts } from '../../../api/products';
 
 const ProductFinishedBox = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -17,34 +17,27 @@ const ProductFinishedBox = () => {
 
   const debouncedKeyword = useDebounce(keyword, 500); // 0.5초 후 검색
 
-  const fetchProducts = useCallback(async () => {
-    try {
-      const response = await axios.get('/inspectors/products/search', {
-        params: {
-          keyword: debouncedKeyword,
-          inspected,
-          pageNum: currentPage,
-          pageSize: itemsPerPage,
-        },
-      });
+  const fetchProductsCallback = useCallback(async () => {
+    const result = await fetchProducts({
+      keyword: debouncedKeyword,
+      inspected,
+      pageNum: currentPage,
+      pageSize: itemsPerPage,
+    });
 
-      if (response.data.success) {
-        const { items, totalPages } = response.data.response;
-        setProducts(items);
-        setTotalPages(totalPages);
-      } else {
-        console.error('API 응답 실패:', response.data.error);
-        setProducts([]);
-      }
-    } catch (error) {
-      console.error('상품 목록 불러오기 실패:', error);
+    if (result.success) {
+      setProducts(result.items);
+      setTotalPages(result.totalPages);
+    } else {
+      console.error('API 응답 실패:', result.error);
+      setProducts([]);
     }
   }, [debouncedKeyword, inspected, currentPage, itemsPerPage]);
 
   // keyword나 페이지가 바뀔 때마다 바로 검색
   useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
+    fetchProductsCallback();
+  }, [fetchProductsCallback]);
 
   // 검색어 입력 시 바로 반영
   const handleKeywordChange = (value) => {
