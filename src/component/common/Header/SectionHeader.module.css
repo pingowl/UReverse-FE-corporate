@@ -1,0 +1,63 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px; /* 제목과 검색바 사이 간격 */
+  flex-wrap: wrap; /* 좁은 화면 대응, 줄바꿈 허용 */
+  max-width: 100%; /* Search 바가 넘치지 않도록 */
+  width: 100%; /* 부모 영역을 꽉 채움 */
+  box-sizing: border-box;
+  padding-right: 16px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.leftHeader {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0; /* 제목 영역은 줄어들지 않음 */
+}
+
+.rightHeader {
+  flex: 1 1 200px;
+  min-width: 160px;
+  max-width: 400px;
+  display: flex;
+  justify-content: flex-end;
+  /* 부모 영역을 넘어서면 가리기 */
+  overflow: hidden;
+}
+
+.tag {
+  width: 15px;
+  height: 30px;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.adminTag {
+  background-color: #3cb371; /* admin 테마 색 */
+}
+
+.inspectorTag {
+  background-color: #ffd43b; /* inspector 테마 색 */
+}
+
+.titleTop {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  white-space: nowrap; /* 제목 줄바꿈 방지 */
+}
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding-right: 0;
+  }
+  .rightHeader {
+    max-width: 100%;
+    min-width: 100px;
+  }
+}
