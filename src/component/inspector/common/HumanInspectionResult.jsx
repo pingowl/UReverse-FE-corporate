@@ -38,9 +38,6 @@ export default function HumanInspectionResult({ human }) {
           <b>검수자 코멘트</b>: {human?.notes}
         </li>
         <li>
-          <b>검수자</b>: {human?.inspectorEmail}
-        </li>
-        <li>
           <b>검수 일시</b>: {human?.createdAt}
         </li>
       </ul>
