@@ -1,0 +1,25 @@
+/* 전체 박스 */
+.detail-container {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  margin-bottom: 24px;
+  /* font-family: 'Pretendard', 'Roboto', sans-serif; */
+}
+
+.detail-save-time {
+  font-size: 13px;
+  color: gray;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 반응형 */
+@media (max-width: 900px) {
+  .detail-container {
+    padding: 18px 6vw;
+  }
+}
