@@ -177,3 +177,15 @@
 .criteria-table td {
   background: #fff;
 }
+
+/* 반응형 */
+@media (max-width: 900px) {
+  .image-list {
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .product-info-card {
+    width: 100%;
+  }
+}

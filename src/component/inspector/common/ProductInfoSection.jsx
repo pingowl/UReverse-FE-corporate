@@ -1,6 +1,6 @@
-// ProductInfoSection.jsx
 import React, { useState } from 'react';
 import styles from './ProductInfoSection.module.css';
+import ImageModal from '../../common/ImageModal/ImageModal';
 
 // 하자 항목 정의
 const DEFECTS = [
@@ -83,23 +83,7 @@ export default function ProductInfoSection({ product }) {
       </div>
       {/* 이미지 팝업 */}
       {modalImg && (
-        <div
-          className={styles['modal-backdrop']}
-          onClick={() => setModalImg(null)}
-        >
-          <div
-            className={styles['modal-img-box']}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img src={modalImg} alt="확대이미지" />
-            <button
-              className={styles['modal-close']}
-              onClick={() => setModalImg(null)}
-            >
-              ×
-            </button>
-          </div>
-        </div>
+        <ImageModal src={modalImg} onClose={() => setModalImg(null)} />
       )}
 
       {/* 상품 정보 카드 */}

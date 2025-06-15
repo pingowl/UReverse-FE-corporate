@@ -9,6 +9,8 @@ import {
   submitProductInspection,
 } from '../../../api/products';
 import { loadWaitingProductForm } from '../../../utils/localStorageUtils';
+import InspectionForm from './form/InspectionForm';
+import ImageModal from '../../common/ImageModal/ImageModal';
 
 const WaitingProductDetailBox = () => {
   const { id } = useParams();
@@ -163,142 +165,20 @@ const WaitingProductDetailBox = () => {
       <ProductInfoSection product={product} setModalImg={setModalImg} />
 
       {/* 검수 입력 폼 */}
-      <form className={styles['form-section']} onSubmit={handleSubmit}>
-        {/* 하자 여부 체크 */}
-        <div className={styles['form-label']}>하자 여부</div>
-        <div className={styles['defect-grid']}>
-          {[
-            { key: 'hasStain', label: '얼룩' },
-            { key: 'isTorn', label: '찢김' },
-            { key: 'hasFading', label: '변색' },
-            { key: 'isStretched', label: '늘어남' },
-            { key: 'otherDefect', label: '기타 하자' },
-          ].map((item) => (
-            <div key={item.key} className={styles['defect-item']}>
-              <span>{item.label}</span>
-              <div className={styles['defect-toggle']}>
-                {['Y', 'N'].map((val) => (
-                  <React.Fragment key={val}>
-                    <input
-                      type="radio"
-                      id={`${item.key}_${val}`}
-                      name={item.key}
-                      value={val}
-                      checked={form[item.key] === val}
-                      onChange={handleChange}
-                    />
-                    <label htmlFor={`${item.key}_${val}`}>
-                      {val === 'Y' ? '있음' : '없음'}
-                    </label>
-                  </React.Fragment>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* 코멘트 */}
-        <label className={styles['form-label']}>검수 코멘트</label>
-        <textarea
-          className={styles['form-textarea']}
-          name="notes"
-          value={form.notes}
-          onChange={handleChange}
-          placeholder="검수 시 발견한 특징, 하자, 참고사항 등을 입력해 주세요."
-        />
-
-        {/* 지급 포인트 */}
-        <div className={styles['form-label']}>지급 포인트</div>
-        <div className={styles['form-row']}>
-          <span>H.point</span>
-          <input
-            className={styles['form-input']}
-            name="expectedPoint"
-            value={discountedPoint.toLocaleString()}
-            readOnly
-            style={{ fontWeight: 700, color: selectedColor, width: 100 }}
-          />
-          <span
-            className={styles['point-rate']}
-            style={{ color: selectedColor, marginLeft: 8, fontWeight: 600 }}
-          >
-            ({Math.round(selectedRate * 100)}%)
-          </span>
-        </div>
-
-        {/* 등급 선택 라디오 */}
-        <div className={styles['form-label']}>등급</div>
-        <div className={styles['grade-row']}>
-          {['S', 'A', 'B', 'C', 'F'].map((grade) => (
-            <label
-              key={grade}
-              className={`${styles['grade-label']} ${
-                form.grade === grade ? styles['grade-selected'] : ''
-              }`}
-            >
-              <input
-                type="radio"
-                name="grade"
-                value={grade}
-                checked={form.grade === grade}
-                onChange={handleChange}
-                className={styles['grade-radio']}
-              />
-              {grade}
-            </label>
-          ))}
-        </div>
-
-        {/* 최종 결과 */}
-        <div className={styles['result-indicator']}>
-          최종 결과{' '}
-          <span
-            className={`${styles['result-text']} ${
-              form.grade === 'F'
-                ? styles['fail']
-                : form.grade
-                ? styles['pass']
-                : ''
-            }`}
-          >
-            {form.grade === '' ? '-' : form.grade === 'F' ? 'FAIL' : 'PASS'}
-          </span>
-        </div>
-
-        {/* 제출 버튼 */}
-        <div className={styles['button-row']}>
-          <button type="submit" className={styles['submit-btn']}>
-            등록
-          </button>
-          <button
-            type="button"
-            className={styles['back-btn']}
-            onClick={() => navigate(-1)}
-          >
-            뒤로
-          </button>
-        </div>
-      </form>
+      <InspectionForm
+        form={form}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+        product={product}
+        selectedColor={selectedColor}
+        selectedRate={selectedRate}
+        discountedPoint={discountedPoint}
+        navigate={navigate}
+      />
 
       {/* 이미지 팝업 */}
       {modalImg && (
-        <div
-          className={styles['modal-backdrop']}
-          onClick={() => setModalImg(null)}
-        >
-          <div
-            className={styles['modal-img-box']}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img src={modalImg} alt="확대이미지" />
-            <button
-              className={styles['modal-close']}
-              onClick={() => setModalImg(null)}
-            >
-              ×
-            </button>
-          </div>
-        </div>
+        <ImageModal src={modalImg} onClose={() => setModalImg(null)} />
       )}
     </div>
   );
