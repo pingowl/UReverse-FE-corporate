@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import PickupProgress from './PickupProgress';
 import styles from './Pickup.module.css';
+import GradeBadge from '../../common/Product/GradeBadge';
 
 const PickupItem = ({ product }) => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const PickupItem = ({ product }) => {
 
   const categoryFull = [product.categoryMain, product.categorySub]
     .filter(Boolean)
-    .join(' ');
+    .join('/');
 
   return (
     <tr className={styles.row} onClick={handleClick}>
@@ -30,13 +31,16 @@ const PickupItem = ({ product }) => {
         <strong>{categoryFull}</strong>
       </td>
       <td>
-        <span className={`${styles.gradeBox} ${styles[`grade_${product.grade || 'N'}`]}`}>
-          {product.grade || '-'}
-        </span>
+        {product.grade ? (
+          <GradeBadge grade={product.grade} />
+        ) : (
+          <span>-</span>
+        )}
+
       </td>
       <td>{product.paid_point != null ? `${product.paid_point.toLocaleString()} P` : ' - '}</td>
       <td>{product.updatedAt?.split(' ')[0]}</td>
-      <td style={{ maxWidth: '300px', minWidth: '140px' }}>
+      <td style={{ width: '200px'}}>
         <PickupProgress currentState={product.status?.toUpperCase()} />
       </td>
     </tr>

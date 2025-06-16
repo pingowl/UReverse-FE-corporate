@@ -3,9 +3,15 @@ import PickupItem from './PickupItem';
 import Pagination from '../../common/Pagination/Pagination';
 import styles from './Pickup.module.css';
 import { fetchPickupProducts } from '../../../api/administrator/fetchPickupProducts';
+import { fetchAllBrands } from '../../../api/common/fetchAllBrands';
+import { fetchAllCategories } from '../../../api/common/fetchAllCategories';
+
 
 const PickupBox = () => {
   const [products, setProducts] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [categories, setCategories] = useState([]);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -19,6 +25,32 @@ const PickupBox = () => {
   });
 
   const pageSize = 6;
+
+  useEffect(() => {
+      const loadBrands = async () => {
+        const res = await fetchAllBrands();
+        if (res.success) {
+          setBrands(res.brands.map((b) => b.name));
+        } else {
+          console.error(res.error || '브랜드 정보를 불러오는 데 실패했습니다.');
+        }
+      };
+  
+      loadBrands();
+    }, []);
+  
+     useEffect(() => {
+      const loadCategories = async () => {
+        const res = await fetchAllCategories();
+        if (res.success) {
+          setCategories(res.categories);
+        } else {
+          console.error(res.error || '카테고리 정보를 불러오는 데 실패했습니다.');
+        }
+      };
+      loadCategories();
+    }, []);
+  
 
   const handleFilterChange = (key, value) => {
     setFilters((prev) => ({
@@ -69,24 +101,21 @@ const PickupBox = () => {
         </div>
 
         <div className={styles.filters}>
-          <select
-            value={filters.brand}
-            onChange={(e) => handleFilterChange('brand', e.target.value)}
-          >
+          <select onChange={(e) => handleFilterChange('brand', e.target.value)}>
             <option value="">브랜드 전체</option>
-            <option value="나이키">나이키</option>
-            <option value="푸마">푸마</option>
-            <option value="아디다스">아디다스</option>
+            {brands.map((brand) => (
+              <option key={brand} value={brand}>
+                {brand}
+              </option>
+            ))}
           </select>
-
-          <select
-            value={filters.categoryMain}
-            onChange={(e) => handleFilterChange('categoryMain', e.target.value)}
-          >
+          <select onChange={(e) => handleFilterChange('categoryMain', e.target.value)}>
             <option value="">카테고리 전체</option>
-            <option value="상의">상의</option>
-            <option value="아우터">아우터</option>
-            <option value="하의">하의</option>
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
           </select>
 
           <select

@@ -3,7 +3,7 @@ import { FaClock } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import styles from './ProductWaiting.module.css';
 
-const ProductWaitingItem = ({ id, image, name, price, date }) => {
+const ProductWaitingItem = ({ id, image, name, categoryMain, categorySub, price, date }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -16,8 +16,11 @@ const ProductWaitingItem = ({ id, image, name, price, date }) => {
         <img src={image} alt={name} className={styles.image} />
       </div>
       <div className={styles.infoRow}>
-        <span className={styles.name}>{name}</span>
-        <span className={styles.price}>{price}원</span>
+        <span className={styles.name}>
+          <span className={styles.brand}>{name}</span>
+          <span className={styles.category}> - {categoryMain}/{categorySub}</span>
+        </span>
+        <span className={styles.price}>{price}P</span>
       </div>
       <div className={styles.dateRow}>
         <FaClock className={styles.clockIcon} />

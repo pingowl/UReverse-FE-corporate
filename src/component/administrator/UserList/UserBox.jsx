@@ -18,7 +18,7 @@ const UserBox = () => {
   useEffect(() => {
   const getUsers = async () => {
     const { success, data, error } = await fetchUser({
-      email: debouncedSearchTerm, // ✅ debounce된 값 사용
+      email: debouncedSearchTerm,
       offset: itemsPerPage,
       pageNum: currentPage,
     });

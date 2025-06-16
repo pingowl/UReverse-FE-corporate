@@ -2,7 +2,7 @@
 .pickupBox {
   background: white;
   padding: 24px;
-  border-radius: 12px;
+  border-radius: 5px;
   box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
   margin-bottom: 24px;
   min-width: 1300px;
@@ -34,15 +34,16 @@
   color: #333;
 }
 
-.table{
-  width:100%;
+.table {
+  width: 100%;
   border-collapse: collapse;
   margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
 }
 
 .table th,
-.table td{
-  text-align:center;
+.table td {
+  text-align: center;
   padding: 14px 10px;
   border-bottom: 1px solid #eee;
   font-size: 14px;
@@ -58,50 +59,17 @@
   width: 90px;
   height: 90px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 5px;
 }
 
-/* PickupItem */
-.gradeBox {
-  font-weight: 800;
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-size: 1.1rem;
-  display: inline-block;
+.table tbody tr {
+  transition: background-color 0.3s ease;
 }
 
-.grade_S {
-  background: linear-gradient(135deg, #ffe082, #ffd54f);
-  color: #4e342e;
-  border: none;
-  box-shadow: 0 2px 4px rgba(255, 215, 0, 0.4);
-  font-weight: 700;
+.table tbody tr:hover {
+  background-color: #eaf5f1; 
+  cursor: pointer;
 }
-
-.grade_A {
-  background: linear-gradient(135deg, #b2dfdb, #80cbc4);
-  color: #004d40;
-  border: none;
-  box-shadow: 0 2px 4px rgba(0, 150, 136, 0.2);
-  font-weight: 600;
-}
-
-.grade_B {
-  background: linear-gradient(135deg, #fff59d, #fdd835);
-  color: #795548;
-  border: none;
-  box-shadow: 0 2px 4px rgba(255, 235, 59, 0.3);
-  font-weight: 500;
-}
-
-.grade_C {
-  background: linear-gradient(135deg, #ffe082, #fbc02d);
-  color: #6d4c41;
-  border: none;
-  box-shadow: 0 2px 4px rgba(255, 202, 40, 0.25);
-  font-weight: 500;
-}
-
 
 
 /* PickupProgress */
@@ -172,7 +140,22 @@
   align-items: center;
 }
 .filters select {
-  padding: 0.5rem;
-  border-radius: 6px;
+  padding: 8px 12px;
+  border-radius: 8px;
   border: 1px solid #ccc;
+  background-color: #fdfdfd;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.filters select:hover {
+  border-color: #77bfa3;
+  cursor: pointer;
+}
+
+.filters select:focus {
+  border-color: #77bfa3;
+  box-shadow: 0 0 0 3px rgba(119, 191, 163, 0.2);
 }

@@ -74,11 +74,6 @@ function LoginBox({ isInspector }) {
         >
           <div className={styles.loginContent}>
             <div className={styles.logo}>
-              <img
-                src="/logo.png"
-                alt="logo"
-                style={{ height: '70px', marginRight: '1px' }}
-              />
               <span className={styles.logoText}>U:Reverse</span>
             </div>
 

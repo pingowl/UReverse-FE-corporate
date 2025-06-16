@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
 import styles from './Dashboard.module.css';
 import { fetchDashboardFinish } from '../../../api/administrator/fetchDashboardFinish';
+import CustomTooltip from './CustomTooltip';
 
 const periodMap = {
   '7days': 'week',
@@ -71,12 +72,21 @@ const ChartBox = () => {
           <div>데이터가 없습니다.</div>
         ) : (
           <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+            <BarChart
+              data={chartData}
+              margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+              barCategoryGap="20%"
+            >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="baseDate" />
               <YAxis />
-              <Tooltip />
-              <Bar dataKey="finishCount" fill="#77bfa3" />
+              <Tooltip content={<CustomTooltip customName="수거 완료" />} />
+              <Bar
+                dataKey="finishCount"
+                fill="#77bfa3"
+                radius={[5, 5, 0, 0]}
+                isAnimationActive={true}
+              />
             </BarChart>
           </ResponsiveContainer>
         )}

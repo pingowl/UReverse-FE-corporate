@@ -22,7 +22,7 @@ const Layout = ({ role }) => {
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
           <Header role={role} />
           <div style={{ flex: 1, overflowY: 'auto' }}>
-            <main style={{ padding: '20px' }}>
+            <main style={{ padding: '8px' }}>
               <Outlet />
             </main>
           </div>

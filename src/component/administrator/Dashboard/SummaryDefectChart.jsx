@@ -2,21 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import styles from './Dashboard.module.css';
 import { fetchDashboardSummaryDefectChart } from '../../../api/administrator/fetchDashboardSummaryDefectChart';
+import CustomTooltip from './CustomTooltip'; // ✅ 추가
 
 const COLORS = [
-  '#6C91E6', // 진한 파스텔 블루
-  '#7D89C2', // 톤다운 데님 블루
-  '#E89FB0', // 중간톤 로즈핑크
-  '#EAD38C', // 머스타드 베이지
-  '#A891B7', // 라벤더 퍼플 계열 진한톤
-  '#E8A07D', // 톤다운된 살구 코랄
-  '#B8C292', // 올리브 카키 느낌의 중간톤
+  '#6C91E6', '#7D89C2', '#E89FB0', '#EAD38C',
+  '#A891B7', '#E8A07D', '#B8C292',
 ];
 
-
-
-
-const SummaryDefectChart = ({date}) => {
+const SummaryDefectChart = ({ date }) => {
   const [type, setType] = useState('AI');
   const [chartData, setChartData] = useState([]);
   const [hasData, setHasData] = useState(true);
@@ -71,7 +64,7 @@ const SummaryDefectChart = ({date}) => {
                 <Cell key={i} fill={COLORS[i % COLORS.length]} />
               ))}
             </Pie>
-            <Tooltip />
+            <Tooltip content={<CustomTooltip />} /> {/* ✅ 툴팁 변경 */}
             <Legend layout="vertical" verticalAlign="middle" align="right" />
           </PieChart>
         ) : (

@@ -57,6 +57,8 @@ const ProductWaitingBox = () => {
             key={product.productId}
             id={product.productId}
             name={product.brandName}
+            categoryMain={product.categoryMain}
+            categorySub={product.categorySub}
             image={product.imageUrl}
             price={product.expectedPoint}
             date={product.createdAt}

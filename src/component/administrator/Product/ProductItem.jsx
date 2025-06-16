@@ -2,6 +2,7 @@ import React from 'react';
 import { FaClock } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import styles from './Product.module.css';
+import GradeBadge from '../../common/Product/GradeBadge';
 
 const ProductItem = ({ id, image, brand, categoryMain, categorySub, grade, finishDate }) => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const ProductItem = ({ id, image, brand, categoryMain, categorySub, grade, finis
           <span className={styles.brand}>{brand}</span>
           <span className={styles.category}> - {categoryMain}/{categorySub}</span>
         </span>
-        <span className={`${styles.grade} ${styles[`grade_${grade}`]}`}>{grade}</span>
+        <GradeBadge grade={grade}/>
       </div>
       <div className={styles.dateRow}>
         <FaClock className={styles.clockIcon} />

@@ -5,6 +5,10 @@ import styles from './ProductInfoSection.module.css';
 export default function ProductImages({ imageUrls }) {
   const [modalImg, setModalImg] = useState(null);
 
+  const images = Array.isArray(imageUrls)
+    ? imageUrls.filter((url) => url && url !== 'null')
+    : [];
+
   return (
     <>
       <div className={styles['image-list']}>
@@ -12,16 +16,16 @@ export default function ProductImages({ imageUrls }) {
           <div
             key={idx}
             className={styles['image-thumb']}
-            onClick={() => imageUrls[idx] && setModalImg(imageUrls[idx])}
+            onClick={() => images[idx] && setModalImg(images[idx])}
             style={{
-              cursor: imageUrls[idx] ? 'pointer' : 'default',
-              opacity: imageUrls[idx] ? 1 : 0.25,
-              background: imageUrls[idx] ? '#ffe066' : 'transparent',
+              cursor: images[idx] ? 'pointer' : 'default',
+              opacity: images[idx] ? 1 : 0.25,
+              background: images[idx] ? '#ffe066' : 'transparent',
             }}
           >
-            {imageUrls[idx] && (
+            {images[idx] && (
               <img
-                src={imageUrls[idx]}
+                src={images[idx]}
                 alt={`상품이미지${idx + 1}`}
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
@@ -29,6 +33,7 @@ export default function ProductImages({ imageUrls }) {
           </div>
         ))}
       </div>
+
       {modalImg && (
         <ImageModal src={modalImg} onClose={() => setModalImg(null)} />
       )}
