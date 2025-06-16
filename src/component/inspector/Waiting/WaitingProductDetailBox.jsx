@@ -3,14 +3,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import ProductInfoSection from '../common/ProductInfoSection';
 import SectionHeader from '../../common/Header/SectionHeader';
 import styles from './ProductWaitingDetailBox.module.css';
-import { IoCheckmarkDoneSharp } from 'react-icons/io5';
 import {
   fetchPendingProductDetail,
   submitProductInspection,
 } from '../../../api/products';
 import { loadWaitingProductForm } from '../../../utils/localStorageUtils';
 import InspectionForm from './form/InspectionForm';
-import ImageModal from '../../common/ImageModal/ImageModal';
 import LastSavedIndicator from '../../common/LastSavedIndicator';
 
 const WaitingProductDetailBox = () => {

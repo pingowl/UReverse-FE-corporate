@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar/Sidebar';
 import Header from './Header/Header';
+import { RoleContext } from '../../utils/RoleContext';
 
 const Layout = ({ role }) => {
   const navigate = useNavigate();
@@ -15,15 +16,19 @@ const Layout = ({ role }) => {
   }, [role, navigate]);
 
   return (
-    <div style={{ display: 'flex'}}>
-      <Sidebar role={role} />
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <Header role={role} />
-        <main style={{ padding: '20px', flex: 1 }}>
-          <Outlet />
-        </main>
+    <RoleContext.Provider value={role}>
+      <div style={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
+        <Sidebar role={role} />
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+          <Header role={role} />
+          <div style={{ flex: 1, overflowY: 'auto' }}>
+            <main style={{ padding: '20px' }}>
+              <Outlet />
+            </main>
+          </div>
+        </div>
       </div>
-    </div>
+    </RoleContext.Provider>
   );
 };
 
