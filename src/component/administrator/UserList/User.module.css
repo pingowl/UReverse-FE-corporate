@@ -5,6 +5,7 @@
   border-radius: 12px;
   box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
   margin-bottom: 24px;
+  min-width: 1300px;
 }
 
 .header {

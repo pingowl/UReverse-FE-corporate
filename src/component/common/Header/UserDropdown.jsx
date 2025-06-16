@@ -16,7 +16,7 @@ const UserDropdown = ({ userName, role }) => {
     } else if (role === 'inspector') {
       window.location.href = '/inspector/login';
     } else {
-      window.location.href = '/login'; // fallback
+      window.location.href = '/login';
     }
   };
 

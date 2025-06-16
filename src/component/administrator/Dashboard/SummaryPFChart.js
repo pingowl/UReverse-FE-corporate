@@ -3,7 +3,11 @@ import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import styles from './Dashboard.module.css';
 import { fetchDashboardSummaryPFChart } from '../../../api/administrator/fetchDashboardSummaryPFChart';
 
-const COLORS = ['#0000FF', '#FF0000'];
+const COLORS = [
+  '#7D89C2', // 톤다운 데님 블루
+  '#E89FB0', // 중간톤 로즈핑크
+];
+
 
 const SummaryPFChart = ({date}) => {
   const [type, setType] = useState('검수자');

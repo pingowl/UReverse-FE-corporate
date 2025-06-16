@@ -4,14 +4,16 @@ import styles from './Dashboard.module.css';
 import { fetchDashboardSummaryDefectChart } from '../../../api/administrator/fetchDashboardSummaryDefectChart';
 
 const COLORS = [
-  '#FF0000', // 빨강
-  '#0000FF', // 파랑
-  '#00AA00', // 초록
-  '#FFA500', // 주황
-  '#800080', // 보라
-  '#FFFF00', // 노랑
-  '#00CED1', // 청록
+  '#6C91E6', // 진한 파스텔 블루
+  '#7D89C2', // 톤다운 데님 블루
+  '#E89FB0', // 중간톤 로즈핑크
+  '#EAD38C', // 머스타드 베이지
+  '#A891B7', // 라벤더 퍼플 계열 진한톤
+  '#E8A07D', // 톤다운된 살구 코랄
+  '#B8C292', // 올리브 카키 느낌의 중간톤
 ];
+
+
 
 
 const SummaryDefectChart = ({date}) => {

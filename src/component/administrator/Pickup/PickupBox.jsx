@@ -29,7 +29,6 @@ const PickupBox = () => {
   };
 
   useEffect(() => {
-    let intervalId;
     const loadProducts = async () => {
       setLoading(true);
       setError(null);

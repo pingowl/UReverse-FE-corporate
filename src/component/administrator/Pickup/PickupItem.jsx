@@ -7,7 +7,7 @@ const PickupItem = ({ product }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/admin/pickup/${product.id}`); // ✅ Fixed: Backticks for template literal
+    navigate(`/admin/pickup/${product.id}`);
   };
 
   const categoryFull = [product.categoryMain, product.categorySub]

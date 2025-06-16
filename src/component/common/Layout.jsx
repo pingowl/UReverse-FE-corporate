@@ -9,14 +9,13 @@ const Layout = ({ role }) => {
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
     if (!token) {
-      // 권한별 로그인 페이지로 이동
       if (role === 'admin') navigate('/admin/login');
       else if (role === 'inspector') navigate('/inspector/login');
     }
   }, [role, navigate]);
 
   return (
-    <div style={{ display: 'flex', height: '100vh' }}>
+    <div style={{ display: 'flex'}}>
       <Sidebar role={role} />
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         <Header role={role} />
