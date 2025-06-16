@@ -1,66 +1,50 @@
 /* LoginBox */
 .loginWrapper{
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-}
-.loginimg{
-  flex: 2;
-  display: flex;
-}
-.loginimg {
-  flex: 2;
-  position: relative;
-  overflow: hidden;
-}
-
-.slideImage {
-  width: 100%;
-  height: 100vh;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: opacity 1s ease-in-out;
-  opacity: 1;
-}
-
-.fadeIn {
-  opacity: 1;
-}
-
-.fadeOut {
-  opacity: 0;
-}
-
-.loginFormDiv{
-  flex: 1;
+  padding: 24px;
+  border-radius: 5px;
+  margin-bottom: 24px;
+  min-width: 1300px;
+  min-height: 730px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+.loginFormDiv {
+  background-color: #ffffff;
+  width: 420px;
+  padding: 40px 32px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .loginDiv{
-    width:400px;
+    width:450px;
     height:450px;
     border-radius: 10px;
     display: flex;
     justify-items: center;
     align-items: center;
+    /* background-color: red; */
 }
 
 .loginContent{
     margin: 0 auto;
-    height: 280px;
     display: flex;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
 }
+
 .logo {
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  margin-bottom: 30px;
+  margin-bottom: 60px;
 }
 
 @font-face {
@@ -73,15 +57,16 @@
 
 .logoText {
   font-family: "RoundestSerialHeavy", sans-serif;
-  font-size: 30px;
+  font-size: 50px;
   font-weight: bold;
   color: #333;
   margin-right: 10px;
 }
+
 /* LoginInput */
 .inputWrapper {
   position: relative;
-  width: 350px;
+  width: 400px;
   margin-bottom: 12;
 }
 
@@ -97,7 +82,7 @@
 
 .loginInput {
   width: 100%;
-  height: 40px;
+  height: 45px;
   padding: 10px 10px 10px 38px;
   margin-bottom: 16px;
   font-size: 13px;
@@ -133,7 +118,7 @@ background-color: #77BFA3;
   font-weight: 600;
   font-size: 1rem;
   width: 100%;
-  height: 40px;
+  height: 45px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -156,4 +141,17 @@ background-color: #77BFA3;
 
 .inspectorButton:hover {
   background-color: #f4c400;
+}
+
+.errorMsg {
+  color: #d93025;
+  background-color: #fce8e6;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 12px;
+  width: 100%;
+  text-align: center;
+  border: 1px solid #f7c2bc;
+  box-sizing: border-box;
 }

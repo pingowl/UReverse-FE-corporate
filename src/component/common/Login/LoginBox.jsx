@@ -5,35 +5,12 @@ import LoginInput from './LoginInput';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../../api/auth';
 
-import PangyoHY from "../../../assets/images/login/PangyoHY.webp";
-import ApgujeongHY from "../../../assets/images/login/ApgujeongHY.webp";
-
-const images = [PangyoHY, ApgujeongHY];
 
 function LoginBox({ isInspector }) {
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
   const [error, setError] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [fade, setFade] = useState(true);
   const navigate = useNavigate();
-
-  // 이미지 슬라이드 효과
-  useEffect(() => {
-    const displayDuration = 10000; // 10초 유지
-    const fadeDuration = 1000; // 1초 페이드
-
-    const timer = setTimeout(() => {
-      setFade(false); // 페이드 아웃 시작
-
-      setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % images.length);
-        setFade(true); // 페이드 인 시작
-      }, fadeDuration);
-    }, displayDuration);
-
-    return () => clearTimeout(timer);
-  }, [currentIndex]);
 
   // 로그인 처리
   const handleLogin = async (e) => {
@@ -53,20 +30,12 @@ function LoginBox({ isInspector }) {
         setError('권한이 없습니다.');
       }
     } else {
-      setError('로그인 실패: ' + (res.error || ''));
+      setError((res.error || ''));
     }
   };
 
   return (
     <div className={styles.loginWrapper}>
-      <div className={styles.loginimg}>
-        <img
-          src={images[currentIndex]}
-          alt="login slide"
-          className={`${styles.slideImage} ${fade ? styles.fadeIn : styles.fadeOut}`}
-        />
-      </div>
-
       <div className={styles.loginFormDiv}>
         <form
           className={`${styles.loginDiv} ${isInspector ? styles.inspectorBox : ''}`}

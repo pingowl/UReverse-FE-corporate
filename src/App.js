@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+import ProtectedRoute from './routes/ProtectedRoute';
+
 import Login from './pages/administrator/Login';
 import Layout from './component/common/Layout';
 import Dashboard from './pages/administrator/Dashboard';
@@ -19,26 +21,54 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* 로그인 페이지는 레이아웃 없이 */}
-        <Route path="/admin/login" element={<Login />} />
-        <Route path="/inspector/login" element={<Login />} />
-
         {/* administrator */}
         <Route path="/admin" element={<Layout role="admin" />}>
-          <Route index element={<Dashboard />} />
-          <Route path="product" element={<Product />} />
-          <Route path="products/:id" element={<ProductDetail />} />
-          <Route path="pickup" element={<Pickup />} />
-          <Route path="pickup/:id" element={<PickupDetail />} />
-          <Route path="user" element={<User />} />
+          <Route path="login" element={<Login />} />
+          <Route index element={
+            <ProtectedRoute requiredRole="ROLE_ADMIN">
+              <Dashboard />
+            </ProtectedRoute>} />
+          <Route path="product" element={
+            <ProtectedRoute requiredRole="ROLE_ADMIN">
+              <Product />
+            </ProtectedRoute>} />
+          <Route path="products/:id" element={
+            <ProtectedRoute requiredRole="ROLE_ADMIN">
+              <ProductDetail />
+            </ProtectedRoute>} />
+          <Route path="pickup" element={
+            <ProtectedRoute requiredRole="ROLE_ADMIN">
+              <Pickup />
+            </ProtectedRoute>} />
+          <Route path="pickup/:id" element={
+            <ProtectedRoute requiredRole="ROLE_ADMIN">
+              <PickupDetail />
+            </ProtectedRoute>} />
+          <Route path="user" element={
+            <ProtectedRoute requiredRole="ROLE_ADMIN">
+              <User />
+            </ProtectedRoute>} />
         </Route>
 
         {/* Inspector */}
         <Route path="/inspector" element={<Layout role="inspector" />}>
-          <Route path="waiting" element={<Waiting />} />
-          <Route path="waiting/:id" element={<InspectorWaitingDetail />} />
-          <Route path="finished" element={<Finished />} />
-          <Route path="finished/:id" element={<InspectorFinishedDetail />} />
+          <Route path="login" element={<Login />}/>
+          <Route path="waiting" element={
+            <ProtectedRoute requiredRole="ROLE_INSPECTOR">
+              <Waiting />
+            </ProtectedRoute>} />
+          <Route path="waiting/:id" element={
+            <ProtectedRoute requiredRole="ROLE_INSPECTOR">
+              <InspectorWaitingDetail />
+            </ProtectedRoute>} />
+          <Route path="finished" element={
+            <ProtectedRoute requiredRole="ROLE_INSPECTOR">
+              <Finished />
+            </ProtectedRoute>} />
+          <Route path="finished/:id" element={
+            <ProtectedRoute requiredRole="ROLE_INSPECTOR">
+              <InspectorFinishedDetail />
+            </ProtectedRoute>} />
         </Route>
       </Routes>
     </Router>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 import styles from './Header.module.css';
 
 const UserDropdown = ({ userName, role }) => {
@@ -7,18 +8,26 @@ const UserDropdown = ({ userName, role }) => {
 
   const toggleDropdown = () => setIsOpen((prev) => !prev);
 
-  const handleLogout = () => {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('role');
+  const handleLogout = async () => {
+  try {
+    // 서버에 refreshToken 삭제 요청
+    await axios.post('/api/v1/auth/logout', null, { withCredentials: true });
+  } catch (e) {
+    console.warn('Logout API failed', e);
+    // 실패하더라도 로컬 정보는 지움
+  }
 
-    if (role === 'admin') {
-      window.location.href = '/admin/login';
-    } else if (role === 'inspector') {
-      window.location.href = '/inspector/login';
-    } else {
-      window.location.href = '/login';
-    }
-  };
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('role');
+
+  if (role === 'admin') {
+    window.location.href = '/admin/login';
+  } else if (role === 'inspector') {
+    window.location.href = '/inspector/login';
+  } else {
+    window.location.href = '/login';
+  }
+};
 
   useEffect(() => {
     const handleClickOutside = (event) => {
