@@ -10,10 +10,10 @@ const Login = () => {
     <div
       style={{
         display: "flex",
-        justifyContent: "center", 
-        alignItems: "center",   
+        // justifyContent: "center", 
+        // alignItems: "center",   
         height: "100vh",          
-        backgroundColor: "#f5f5f5"
+        backgroundColor: "white"
       }}
     >
       <LoginBox isInspector={isInspector}/>

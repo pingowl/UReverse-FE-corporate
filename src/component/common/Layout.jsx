@@ -10,7 +10,6 @@ const Layout = ({ role }) => {
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
     if (!token) {
-      // 권한별 로그인 페이지로 이동
       if (role === 'admin') navigate('/admin/login');
       else if (role === 'inspector') navigate('/inspector/login');
     }
@@ -18,13 +17,15 @@ const Layout = ({ role }) => {
 
   return (
     <RoleContext.Provider value={role}>
-      <div style={{ display: 'flex', height: '100vh' }}>
+      <div style={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
         <Sidebar role={role} />
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
           <Header role={role} />
-          <main style={{ padding: '20px', flex: 1 }}>
-            <Outlet />
-          </main>
+          <div style={{ flex: 1, overflowY: 'auto' }}>
+            <main style={{ padding: '20px' }}>
+              <Outlet />
+            </main>
+          </div>
         </div>
       </div>
     </RoleContext.Provider>

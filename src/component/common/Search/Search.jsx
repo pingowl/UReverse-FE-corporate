@@ -3,7 +3,6 @@ import { FiSearch } from 'react-icons/fi';
 import styles from './Search.module.css';
 
 const Search = ({ keyword, onKeywordChange }) => {
-  // 입력값 변경 시 바로 부모에 전달
   const handleChange = (e) => {
     onKeywordChange(e.target.value);
   };

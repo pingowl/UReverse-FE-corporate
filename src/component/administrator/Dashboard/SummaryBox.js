@@ -23,9 +23,9 @@ const SummaryBox = () => {
       </div>
 
       <div className={styles.grid}>
-        <SummaryCard/>
-        <SummaryPFChart/>
-        <SummaryDefectChart/>
+        <SummaryCard date={date}/>
+        <SummaryPFChart date={date}/>
+        <SummaryDefectChart date={date}/>
       </div>
     </div>
   );

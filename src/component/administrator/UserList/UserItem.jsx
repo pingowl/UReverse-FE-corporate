@@ -12,7 +12,7 @@ const UserItem = ({ user, index }) => {
       <td>
         <div className={styles.salesBox}>{user.sales} 건</div>
       </td>
-      <td>{user.created_at}</td>
+      <td>{user.createdAt}</td>
     </tr>
   );
 };

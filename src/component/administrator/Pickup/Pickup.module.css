@@ -5,6 +5,7 @@
   border-radius: 12px;
   box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
   margin-bottom: 24px;
+  min-width: 1300px;
 }
 
 .header {
@@ -109,6 +110,7 @@
   padding: 15px 10px;
   display: flex;
   justify-content: center;
+  width:480px;
 }
 
 .steps {
@@ -161,4 +163,16 @@
 .active .label {
   color: #4caf50;
   font-weight: 600;
+}
+
+/* 필터링 */
+.filters {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.filters select {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }

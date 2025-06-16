@@ -2,8 +2,15 @@ import React from 'react';
 import styles from './ProductDetail.module.css';
 
 const InspectionResult = ({ result, status }) => {
-  const ai = result.ai || {};
-  const inspector = result.inspector || {};
+  const ai = result.aiResult || {};
+  const inspector = result.inspectorResult || {};
+
+  const conditionLabels = {
+    hasStain: '오염',
+    isTorn: '찢어짐',
+    isStretched: '늘어남',
+    hasFading: '색바램',
+  };
 
   const renderResultItems = (labelMap, resultObj) => (
     <div className={styles.aiItems}>
@@ -21,14 +28,6 @@ const InspectionResult = ({ result, status }) => {
     </div>
   );
 
-  const conditionLabels = {
-    stain: '오염',
-    tear: '찢어짐',
-    stretching: '늘어남',
-    fading: '색바램',
-  };
-
-  console.log(status+"abc");
   const isAIInspectorPending = status === 'REGISTER';
   const isInspectorPending = status === 'FIRST_INSPECT' || status === 'REGISTER';
 
@@ -43,13 +42,15 @@ const InspectionResult = ({ result, status }) => {
           <p className={styles.inspectionComment}>🕐 AI가 검수 중입니다.</p>
         ) : (
           <>
-        {renderResultItems(conditionLabels, ai)}
-        {ai.comment && (
-          <p className={styles.inspectionComment}>
-            <strong>AI 코멘트 : </strong> <span>{ai.comment}</span>
-          </p>
+          {console.log(ai.note+"aaaa")}
+            {renderResultItems(conditionLabels, ai)}
+            {ai.note && (
+              <p className={styles.inspectionComment}>
+                <strong>AI 코멘트 : </strong> <span>{ai.note}</span>
+              </p>
+            )}
+          </>
         )}
-        </>)}
       </section>
 
       <hr className={styles.divider} />
@@ -57,20 +58,19 @@ const InspectionResult = ({ result, status }) => {
       {/* 수동 검수자 결과 */}
       <section className={styles.aiSection}>
         <h4>관리자 검수 결과</h4>
-
         {isInspectorPending ? (
           <p className={styles.inspectionComment}>🕐 검수자가 검수 중입니다.</p>
         ) : (
           <>
             {renderResultItems(conditionLabels, inspector)}
-            {inspector.inspectorId && (
+            {inspector.inspectorEmail && (
               <p className={styles.inspectionComment}>
-                <strong>검수자 : </strong> <span>{inspector.inspectorId}</span>
+                <strong>검수자 : </strong> <span>{inspector.inspectorEmail}</span>
               </p>
             )}
-            {inspector.comment && (
+            {inspector.note && (
               <p className={styles.inspectionComment}>
-                <strong>검수자 코멘트 : </strong> <span>{inspector.comment}</span>
+                <strong>검수자 코멘트 : </strong> <span>{inspector.note}</span>
               </p>
             )}
           </>
@@ -80,22 +80,20 @@ const InspectionResult = ({ result, status }) => {
       <hr className={styles.divider} />
 
       {/* 최종 등급 */}
-       <div className={styles.gradeSection}>
-         {isInspectorPending ? (
+      <div className={styles.gradeSection}>
+        {isInspectorPending ? (
           <p className={styles.inspectionComment}>🕐 아직 최종 등급이 나오지 않았습니다.</p>
         ) : (
-          <>
-        <p>
-          <strong>최종 등급:</strong>{' '}
-          <span className={`${styles.grade} ${styles[`grade_${result.grade}`]}`}>
-            {result.grade}
-          </span>
-        </p>
-        </>)}
+          <p>
+            <strong>최종 등급:</strong>{' '}
+            <span className={`${styles.grade} ${styles[`grade_${result.grade}`]}`}>
+              {result.grade}
+            </span>
+          </p>
+        )}
       </div>
     </div>
   );
 };
-
 
 export default InspectionResult;

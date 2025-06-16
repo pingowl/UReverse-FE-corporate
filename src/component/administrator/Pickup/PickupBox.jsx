@@ -1,93 +1,64 @@
-import React, { useState } from 'react';
-import Search from '../../common/Search/Search';
+import React, { useState, useEffect } from 'react';
 import PickupItem from './PickupItem';
 import Pagination from '../../common/Pagination/Pagination';
 import styles from './Pickup.module.css';
-
-// 예시 데이터
-const dummyProducts = [
-  {
-    id: 1,
-    image: 'https://cdn.hellodd.com/news/photo/201909/69577_craw1.jpg',
-    brand: '브랜드 A',
-    category: '카테고리 A',
-    grade: 'S',
-    paid_point: 10000,
-    date: '2025-06-01',
-    state: 'FINISH',
-  },
-  {
-    id: 2,
-    image: 'https://flexible.img.hani.co.kr/flexible/normal/970/710/imgdb/original/2022/0107/20220107501703.jpg',
-    brand: '브랜드 B',
-    category: '카테고리 B',
-    grade: 'A',
-    paid_point: 13000,
-    date: '2025-06-02',
-    state: 'DELIVERY_REQUEST',
-  },
-  {
-    id: 3,
-    image: '',
-    brand: '브랜드 C',
-    category: '카테고리 C',
-    grade: 'A',
-    paid_point: 11000,
-    date: '2025-06-03',
-    state: 'SECOND_INSPECT',
-  },
-  {
-    id: 4,
-    image: '',
-    brand: '브랜드 D',
-    category: '카테고리 D',
-    grade: 'S',
-    paid_point: null,
-    date: '2025-06-01',
-    state: 'FIRST_INSPECT',
-  },
-  {
-    id: 5,
-    image: '',
-    brand: '브랜드 E',
-    category: '카테고리 E',
-    grade: 'S',
-    paid_point: null,
-    date: '2025-06-01',
-    state: 'REGISTER',
-  },
-  {
-    id: 6,
-    image: '',
-    brand: '브랜드 F',
-    category: '카테고리 F',
-    grade: 'C',
-    paid_point: null,
-    date: '2025-06-01',
-    state: 'FIRST_INSPECT',
-  },
-  {
-    id: 7,
-    image: '',
-    brand: '브랜드 G',
-    category: '카테고리 G',
-    grade: 'S',
-    paid_point: null,
-    date: '2025-06-01',
-    state: 'REGISTER',
-  },
-  
-];
+import { fetchPickupProducts } from '../../../api/administrator/fetchPickupProducts';
 
 const PickupBox = () => {
+  const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const indexOfLast = currentPage * itemsPerPage;
-  const indexOfFirst = indexOfLast - itemsPerPage;
-  const currentItems = dummyProducts.slice(indexOfFirst, indexOfLast);
+  const [filters, setFilters] = useState({
+    brand: '',
+    categoryMain: '',
+    grade: '',
+    status: '',
+  });
 
-  const totalPages = Math.ceil(dummyProducts.length / itemsPerPage);
+  const pageSize = 6;
+
+  const handleFilterChange = (key, value) => {
+    setFilters((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+    setCurrentPage(1);
+  };
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      setLoading(true);
+      setError(null);
+
+      const statusList = filters.status ? [filters.status] : [];
+
+      const params = {
+        brand: filters.brand,
+        categoryMain: filters.categoryMain,
+        categorySub: '',
+        grade: filters.grade,
+        statusList,
+        pageSize,
+        pageNum: currentPage,
+      };
+
+      const res = await fetchPickupProducts(params);
+
+      if (res.success) {
+        setProducts(res.response.items);
+        setTotalPages(res.response.totalPages || 1);
+      } else {
+        setError(res.error || '상품 목록을 불러오는데 실패했습니다.');
+      }
+
+      setLoading(false);
+    };
+
+    loadProducts();
+  }, [filters, currentPage]);
 
   return (
     <div className={styles.pickupBox}>
@@ -96,7 +67,53 @@ const PickupBox = () => {
           <div className={styles.tag} />
           <h2 className={styles.titleTop}>수거 관리</h2>
         </div>
-        <Search/>
+
+        <div className={styles.filters}>
+          <select
+            value={filters.brand}
+            onChange={(e) => handleFilterChange('brand', e.target.value)}
+          >
+            <option value="">브랜드 전체</option>
+            <option value="나이키">나이키</option>
+            <option value="푸마">푸마</option>
+            <option value="아디다스">아디다스</option>
+          </select>
+
+          <select
+            value={filters.categoryMain}
+            onChange={(e) => handleFilterChange('categoryMain', e.target.value)}
+          >
+            <option value="">카테고리 전체</option>
+            <option value="상의">상의</option>
+            <option value="아우터">아우터</option>
+            <option value="하의">하의</option>
+          </select>
+
+          <select
+            value={filters.grade}
+            onChange={(e) => handleFilterChange('grade', e.target.value)}
+          >
+            <option value="">등급 전체</option>
+            <option value="S">S</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="F">F</option>
+          </select>
+
+          <select
+            value={filters.status}
+            onChange={(e) => handleFilterChange('status', e.target.value)}
+          >
+            <option value="">상태 전체</option>
+            <option value="REGISTER">상품 등록</option>
+            <option value="FIRST_INSPECT">1차 검수 완료</option>
+            <option value="SECOND_INSPECT">2차 검수 완료</option>
+            <option value="DELIVERY_REQUEST">배송 요청 등록</option>
+            <option value="DELIVERING">배송 중</option>
+            <option value="FINISH">배송 완료</option>
+          </select>
+        </div>
       </div>
 
       <table className={styles.table}>
@@ -112,13 +129,33 @@ const PickupBox = () => {
           </tr>
         </thead>
         <tbody>
-          {currentItems.map((product) => (
-            <PickupItem key={product.id} product={product} />
-          ))}
+          {loading ? (
+            <tr>
+              <td colSpan="7" style={{ textAlign: 'center' }}>
+                로딩 중...
+              </td>
+            </tr>
+          ) : error ? (
+            <tr>
+              <td colSpan="7" style={{ textAlign: 'center', color: 'red' }}>
+                {error}
+              </td>
+            </tr>
+          ) : products.length === 0 ? (
+            <tr>
+              <td colSpan="7" style={{ textAlign: 'center' }}>
+                데이터가 없습니다.
+              </td>
+            </tr>
+          ) : (
+            products.map((product) => (
+              <PickupItem key={product.id} product={product} />
+            ))
+          )}
         </tbody>
       </table>
 
-       <Pagination
+      <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={setCurrentPage}
