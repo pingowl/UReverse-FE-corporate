@@ -1,6 +1,6 @@
 /* 헤더(Header) */
 .header {
-  min-width:1350px;
+  min-width:1300px;
   height:30px;
   display: flex;
   justify-content: end;

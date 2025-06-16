@@ -21,9 +21,12 @@ function App() {
   return (
     <Router>
       <Routes>
+        {/* 로그인 페이지는 레이아웃 없이 */}
+        <Route path="/admin/login" element={<Login />} />
+        <Route path="/inspector/login" element={<Login />} />
+
         {/* administrator */}
         <Route path="/admin" element={<Layout role="admin" />}>
-          <Route path="login" element={<Login />} />
           <Route index element={
             <ProtectedRoute requiredRole="ROLE_ADMIN">
               <Dashboard />
@@ -52,7 +55,6 @@ function App() {
 
         {/* Inspector */}
         <Route path="/inspector" element={<Layout role="inspector" />}>
-          <Route path="login" element={<Login />}/>
           <Route path="waiting" element={
             <ProtectedRoute requiredRole="ROLE_INSPECTOR">
               <Waiting />

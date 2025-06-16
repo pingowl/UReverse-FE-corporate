@@ -9,8 +9,9 @@ const Login = () => {
   return (
     <div
       style={{
-        padding: 24,
-        boxSizing: 'border-box',
+        display: "flex", 
+        height: "100vh",          
+        backgroundColor: "white"
       }}
     >
       <LoginBox isInspector={isInspector}/>

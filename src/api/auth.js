@@ -18,7 +18,7 @@ export async function login(email, password) {
     // 네트워크 에러 등
     return {
       success: false,
-      error: '로그인 실패: 아이디 또는 비밀번호를 확인하세요.',
+      error: '아이디 또는 비밀번호를 확인하세요.',
     };
   }
 }

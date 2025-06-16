@@ -2,14 +2,27 @@ import axios from 'axios';
 
 const instance = axios.create({
   baseURL: '/api/v1',
-  withCredentials: true,
+  withCredentials: true, // refreshToken 쿠키 자동 포함
 });
 
+// 요청 인터셉터: accessToken 자동 헤더 추가
+instance.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+// Refresh Token 로직
 let isRefreshing = false;
 let refreshSubscribers = [];
 
 function onRefreshed(token) {
-  refreshSubscribers.forEach(cb => cb(token));
+  refreshSubscribers.forEach((cb) => cb(token));
   refreshSubscribers = [];
 }
 
@@ -17,78 +30,62 @@ function addRefreshSubscriber(cb) {
   refreshSubscribers.push(cb);
 }
 
-function redirectToLogin(path) {
-  alert('로그인이 필요합니다.');
-  setTimeout(() => {
-    if (path.startsWith('/admin')) {
-      window.location.href = '/admin/login';
-    } else if (path.startsWith('/inspector')) {
-      window.location.href = '/inspector/login';
-    } else {
-      window.location.href = '/login';
-    }
-  }, 300);
-}
-
-instance.interceptors.request.use(
-  config => {
-    const token = localStorage.getItem('accessToken');
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
-    }
-    return config;
-  },
-  error => Promise.reject(error)
-);
-
+// 응답 인터셉터: 403 처리 및 refresh
 instance.interceptors.response.use(
-  response => response,
-  async error => {
+  (response) => response,
+  async (error) => {
     const originalRequest = error.config;
     const path = window.location.pathname;
 
+    // 403이면서 로그인 페이지가 아닐 때
     if (
       error.response &&
       error.response.status === 403 &&
       !originalRequest._retry &&
       !/^\/(admin|inspector)\/login/.test(path)
     ) {
-      originalRequest._retry = true;
+      // accessToken 삭제 (만료로 간주)
       localStorage.removeItem('accessToken');
+      originalRequest._retry = true;
 
+      // refreshToken 재발급 시도
       if (!isRefreshing) {
         isRefreshing = true;
         try {
+          // refresh 요청
           const res = await axios.get('/api/v1/auth/refresh', {
             withCredentials: true,
           });
-
           const newAccessToken = res.data.response.accessToken;
           localStorage.setItem('accessToken', newAccessToken);
-          instance.defaults.headers['Authorization'] = `Bearer ${newAccessToken}`;
+          instance.defaults.headers[
+            'Authorization'
+          ] = `Bearer ${newAccessToken}`;
           onRefreshed(newAccessToken);
-          isRefreshing = false;
         } catch (e) {
-          isRefreshing = false;
-          onRefreshed(null); // 실패 알림: 토큰 없음을 알려서 대기 요청 모두 실패 처리
-          redirectToLogin(path);
+          // refresh도 실패하면 로그인 페이지로 이동
+          if (path.startsWith('/admin')) {
+            window.location.href = '/admin/login';
+          } else if (path.startsWith('/inspector')) {
+            window.location.href = '/inspector/login';
+          } else {
+            window.location.href = '/login';
+          }
           return Promise.reject(e);
+        } finally {
+          isRefreshing = false;
         }
       }
-
-      return new Promise((resolve, reject) => {
-        addRefreshSubscriber(token => {
-          if (token) {
-            originalRequest.headers['Authorization'] = `Bearer ${token}`;
-            resolve(instance(originalRequest));
-          } else {
-            // refresh 실패했으니 여기서 거부
-            reject(error);
-          }
+      // refresh 완료까지 대기
+      return new Promise((resolve) => {
+        addRefreshSubscriber((token) => {
+          originalRequest.headers['Authorization'] = `Bearer ${token}`;
+          resolve(instance(originalRequest));
         });
       });
     }
 
+    // 로그인 페이지이거나 기타 에러는 그대로
     return Promise.reject(error);
   }
 );
