@@ -1,5 +1,6 @@
 /* 헤더(Header) */
 .header {
+  min-width:1350px;
   display: flex;
   justify-content: end;
   align-items: center;
@@ -22,7 +23,7 @@
   cursor: pointer;
   color: #333;
   padding: 8px 14px;
-  border-radius: 8px;
+  border-radius: 5px;
   transition: background-color 0.3s ease, color 0.3s ease;
   box-shadow: none;
 }
@@ -43,7 +44,7 @@
   right: 0;
   background-color: #fff;
   border: 1px solid #cce3d8;
-  border-radius: 12px;
+  border-radius: 5px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
   min-width: 140px;
   z-index: 20;
@@ -62,7 +63,7 @@
   cursor: pointer;
   transition: background-color 0.25s ease, color 0.25s ease;
   font-family: inherit;
-  border-radius: 12px;
+  border-radius: 5px;
 }
 
 .dropdownItem:hover {

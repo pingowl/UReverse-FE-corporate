@@ -29,9 +29,16 @@
 
 .input:focus {
   outline: none;
-  border-color: #1b75bc;
-  box-shadow: 0 0 5px rgba(27, 117, 188, 0.5);
+  border-color: #77bfa3;
+  box-shadow: 0 0 0 3px rgba(119, 191, 163, 0.2);
 }
+
+.inputInspector:focus {
+  outline: none;
+  border-color: #fad026;
+  box-shadow: 0 0 0 3px rgba(241, 196, 15, 0.3);
+}
+
 
 @media (max-width: 600px) {
   .searchWrapper {

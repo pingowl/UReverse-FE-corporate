@@ -19,6 +19,7 @@ const SummaryBox = () => {
           className={styles.datepicker}
           value={date}
           onChange={(e) => setDate(e.target.value)}
+          max={new Date().toISOString().slice(0, 10)}
         />
       </div>
 

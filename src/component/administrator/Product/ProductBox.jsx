@@ -3,9 +3,13 @@ import ProductItem from './ProductItem';
 import Pagination from '../../common/Pagination/Pagination';
 import styles from './Product.module.css';
 import { fetchFinishedProducts } from '../../../api/administrator/fetchFinishedProducts';
+import { fetchAllBrands } from '../../../api/common/fetchAllBrands';
+import { fetchAllCategories } from '../../../api/common/fetchAllCategories';
 
 const ProductBox = () => {
   const [products, setProducts] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [filters, setFilters] = useState({
     brand: '',
     categoryMain: '',
@@ -14,6 +18,31 @@ const ProductBox = () => {
   const [pageNum, setPageNum] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const pageSize = 6;
+
+  useEffect(() => {
+    const loadBrands = async () => {
+      const res = await fetchAllBrands();
+      if (res.success) {
+        setBrands(res.brands.map((b) => b.name));
+      } else {
+        console.error(res.error || '브랜드 정보를 불러오는 데 실패했습니다.');
+      }
+    };
+
+    loadBrands();
+  }, []);
+
+   useEffect(() => {
+    const loadCategories = async () => {
+      const res = await fetchAllCategories();
+      if (res.success) {
+        setCategories(res.categories);
+      } else {
+        console.error(res.error || '카테고리 정보를 불러오는 데 실패했습니다.');
+      }
+    };
+    loadCategories();
+  }, []);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -48,21 +77,27 @@ const ProductBox = () => {
         </div>
         <div className={styles.filters}>
           <select onChange={(e) => handleFilterChange('brand', e.target.value)}>
-            {/* MEMBER-005 연결 예정 */}
             <option value="">브랜드 전체</option>
-            <option value="푸마">푸마</option>
-            <option value="아디다스">아디다스</option>
+            {brands.map((brand) => (
+              <option key={brand} value={brand}>
+                {brand}
+              </option>
+            ))}
           </select>
           <select onChange={(e) => handleFilterChange('categoryMain', e.target.value)}>
             <option value="">카테고리 전체</option>
-            <option value="아우터">아우터</option>
-            <option value="상의">상의</option>
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
           </select>
           <select onChange={(e) => handleFilterChange('grade', e.target.value)}>
             <option value="">등급 전체</option>
             <option value="S">S</option>
             <option value="A">A</option>
             <option value="B">B</option>
+            <option value="C">C</option>
             <option value="F">F</option>
           </select>
         </div>

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './PickupDetail.module.css';
 import ProductInfo from './ProductInfo';
-import InspectionResult from './InspectionResult';
+import AiInspectionResult from './AiInspectionResult';
+import InspectionCriteria from '../../inspector/common/InspectionCriteria';
+import HumanInspectionResult from './HumanInspectionResult';
 import DeliveryInfo from './DeliveryInfo';
 import StatusNotice from './StatusNotice';
 import Button from '../../common/Button/Button';
@@ -14,6 +17,7 @@ const PickupDetailBox = ({ productId }) => {
   const [loading, setLoading] = useState(true);
   const [registering, setRegistering] = useState(false);  // 수거 등록 중 상태
   const [registerError, setRegisterError] = useState(null); // 등록 오류
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!productId) return;
@@ -77,11 +81,11 @@ const PickupDetailBox = ({ productId }) => {
   const status = product.status || '';
 
   const result = {
-    ai: aiResult,
-    inspector: inspectorResult,
+    aiResult: aiResult,
+    inspectorResult: inspectorResult,
     grade: grade,
   };
-
+console.log(aiResult);
   const renderStatusNotice = () => {
     switch (status) {
       case 'FINISH':
@@ -110,14 +114,12 @@ const PickupDetailBox = ({ productId }) => {
       {renderStatusNotice()}
       <br /><br />
 
-      <ProductInfo product={product} />
-      <hr />
-
-      <InspectionResult result={result} status={status} />
-      <hr />
+      <ProductInfo product={product} grade={grade}/>
+      <AiInspectionResult result={result} status={status} />
+      <InspectionCriteria />
+      <HumanInspectionResult result={result} status={status}/>
 
       <DeliveryInfo delivery={delivery} />
-      <hr />
 
       {status === 'SECOND_INSPECT' && (
         <div className={styles.delivery_button_container}>
@@ -132,8 +134,8 @@ const PickupDetailBox = ({ productId }) => {
         </div>
       )}
 
-      <div className={styles.footer}>
-        <Button text="← 뒤로가기" color="secondary" onClick={() => window.history.back()} />
+      <div className={styles.buttonRow}>
+        <Button text="뒤로" onClick={() => navigate(-1)} color="green" />
       </div>
     </div>
   );

@@ -37,111 +37,48 @@
 
 /* ProductInfo */
 .productInfoSection {
-  display: flex;
-  gap: 24px;
   margin-bottom: 24px;
-  justify-content: center;
-  align-items: center;
-}
-
-.carousel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  position: relative;
-}
-
-.carouselImage {
-  width: 350px;
-  height: 350px;
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
-
-.navButton {
-  background: none;
-  border: none;
-  font-size: 28px;
-  cursor: pointer;
-  padding: 0 12px;
-  color: #333;
-  transition: color 0.2s;
 }
 
 .metabox {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  width: 600px;
-  height: 300px;
-  margin-left:30px;
+  border: 1px solid #e7e7e7;
+  border-radius: 10px;
+  padding: 18px 22px;
+  background: #fff;
+  width: 320px;
+  margin-bottom: 18px;
 }
 
-.meta {
+.inforow {
+  font-size: 16px;
+  color: #222;
+  margin-bottom: 8px;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  align-items: center;
 }
-
-.productName {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin: 0;
+.infolabel {
+  font-weight: 600;
+  width: 85px;
+  color: #888;
+  flex-shrink: 0;
+}
+.product-info-card .info-value {
+  font-weight: 400;
   color: #222;
 }
 
-.category {
-  font-size: 1.1rem;
-  color: #666;
-}
-
-.category span {
-  color: #000;
-  font-weight: 500;
-}
-
 .point {
-  font-size: 1.5rem;
   font-weight: 600;
   color: #e64545;
 }
+
 .expectPoint {
   margin-left:5px;
   font-size: 0.85rem;
   color: #888;
 }
-.extraInfo {
-  font-size: 0.95rem;
-  color: #888;
-}
-
-.extraInfo p {
-  margin: 4px 0;
-}
-
-.extraInfo span {
-  font-weight: 500;
-  color: #333;
-}
-
-hr {
-  border: none;
-  border-top: 1px solid rgba(0, 0, 0, 0.1); /* 흐릿한 회색 */
-  width: 90%; /* 너비 조절 */
-  margin: 24px auto; /* 상하 여백, 가운데 정렬 */
-}
-
 
 /* InspectionResult */
-.ins{
-    width:100%;
-}
 .inspectionBox {
     padding: 24px;
     background-color: #f9f9f9;
@@ -188,91 +125,16 @@ hr {
   background-color: #f8f8f8;
   transition: background-color 0.2s ease;
 }
-/* renderResultItems */
-.good {
-  background-color: #e6f4ea;
-  color: #2e7d32;
-  border: 1px solid #c8e6c9;
-}
-
-.bad {
-  background-color: #fdecea;
-  color: #c62828;
-  border: 1px solid #f8bbd0;
-}
-
-.label {
-  text-transform: capitalize;
-  font-weight: 500;
-  color: #333;
-}
-
-.status {
-  font-size: 0.95rem;
-  font-weight: bold;
-}
-
-.inspectionComment {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.5;
-}
-
-.inspectionComment strong {
-  color: #333;
-}
-
-.divider {
-  margin: 24px 0;
-  border: none;
-  border-top: 1px solid #ddd;
-}
-
-.grade {
-  font-weight: 800;
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-size: 1.1rem;
-  display: inline-block;
-}
-
-.grade_A {
-  background-color: #e0f2f1;
-  color: #00796b;
-  border: 1px solid #80cbc4;
-}
-
-.grade_B {
-  background-color: #fff9c4;
-  color: #f9a825;
-  border: 1px solid #fbc02d;
-}
-
-
-
-
-
-
-
 
 /* 하위 버튼 */
-.footer {
+.buttonRow {
+  right: 32px;
+  bottom: 32px;
   display: flex;
+  gap: 12px;
+  z-index: auto;
   justify-content: flex-end;
-  margin-top:40px;
-}
-
-.footer button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  font-size: 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.footer button:hover {
-  background-color: #0056b3;
+  margin-top: 32px;
+  right: auto;
+  bottom: auto;
 }

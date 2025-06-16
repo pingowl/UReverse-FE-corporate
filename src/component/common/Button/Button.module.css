@@ -58,6 +58,17 @@
   background-color: #ffd43b;
 }
 
+.green {
+  background-color: #77bfa3; /* 메인 톤 */
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.green:hover {
+  background-color: #5fb190; /* hover 시 부드러운 진한 톤 */
+}
+
+
 .white {
   background-color: #fff;
   color: #222;

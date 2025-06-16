@@ -5,7 +5,6 @@ import InspectionCriteria from '../common/InspectionCriteria';
 import HumanInspectionResult from './HumanInspectionResult';
 
 export default function ProductInfoSection({ product }) {
-  const ai = product.aiInspection;
 
   return (
     <section>

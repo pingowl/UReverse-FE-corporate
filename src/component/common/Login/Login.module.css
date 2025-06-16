@@ -63,14 +63,21 @@
   margin-bottom: 30px;
 }
 
+@font-face {
+  font-family: "RoundestSerialHeavy";
+  src: url("../../../../public/fonts/Roundest-Serial-Heavy\ Regular.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 .logoText {
-  font-family: 'KCC-Ganpan', sans-serif;
-  font-size: 24px;
+  font-family: "RoundestSerialHeavy", sans-serif;
+  font-size: 30px;
   font-weight: bold;
   color: #333;
   margin-right: 10px;
 }
-
 /* LoginInput */
 .inputWrapper {
   position: relative;

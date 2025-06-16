@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import styles from './ProductDetail.module.css';
 import ProductInfo from './ProductInfo';
-import InspectionResult from './InspectionResult';
+import InspectionCriteria from '../../inspector/common/InspectionCriteria';
+import HumanInspectionResult from './HumanInspectionResult';
+import AiInspectionResult from './AiInspectionResult';
 import Button from '../../common/Button/Button';
 import { fetchFinishedProductDetail } from '../../../api/administrator/fetchFinishedProductDetail';
 
@@ -9,6 +12,7 @@ const ProductDetailBox = ({ productId }) => {
   const [productData, setProductData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
    useEffect(() => {
   if (!productId) return;
@@ -63,14 +67,12 @@ const ProductDetailBox = ({ productId }) => {
         </div>
       </div>
 
-      <ProductInfo product={product} />
-      <hr />
-      <div className={styles.ins}>
-        <InspectionResult result={result} status={status} />
-      </div>
-
-      <div className={styles.footer}>
-        <Button text="← 뒤로가기" color="secondary" onClick={() => window.history.back()} />
+      <ProductInfo product={product} grade={productData.grade}/>
+      <AiInspectionResult result={result} status={status}/>
+      <InspectionCriteria />
+      <HumanInspectionResult result={result} status={status}/>
+      <div className={styles.buttonRow}>
+        <Button text="뒤로" onClick={() => navigate(-1)} color="green" />
       </div>
     </div>
   );
