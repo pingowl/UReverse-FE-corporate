@@ -1,20 +1,21 @@
 import React from 'react';
 import styles from './ProductInfoSection.module.css';
 import { DEFECTS } from './data';
+import { FaClock } from 'react-icons/fa';
 
-export default function AiInspectionResult({ ai }) {
+export default function HumanInspectionResult({ human }) {
   return (
     <div className={styles['inspection-section']}>
       <div className={styles['inspection-title']}>
-        AI 검수 결과 :&nbsp;
+        검수자 검수 결과 :&nbsp;
         <span
           className={
-            ai?.result === 'PASS'
+            human?.result === 'PASS'
               ? styles['inspection-pass']
               : styles['inspection-fail']
           }
         >
-          {ai?.result === 'PASS' ? 'PASS' : 'FAIL'}
+          {human?.result === 'PASS' ? 'PASS' : 'FAIL'}
         </span>
       </div>
       <div className={styles['defect-row']}>
@@ -22,20 +23,22 @@ export default function AiInspectionResult({ ai }) {
           <div
             key={key}
             className={`${styles['defect-box']} ${
-              ai?.[key] === 'Y' ? styles['defect-bad'] : styles['defect-good']
+              human?.[key] === 'Y'
+                ? styles['defect-bad']
+                : styles['defect-good']
             }`}
           >
             <span className={styles['defect-emoji']}>{emoji}</span>
-            {label} {ai?.[key] === 'Y' ? '있음' : '없음'}
+            {label} {human?.[key] === 'Y' ? '있음' : '없음'}
           </div>
         ))}
       </div>
       <ul className={styles['inspection-meta']}>
         <li>
-          <b>AI 코멘트</b>: {ai?.notes}
+          <b>검수자 코멘트</b>: {human?.notes}
         </li>
         <li>
-          <b>검수 일시</b>: {ai?.createdAt}
+          <b>검수 일시</b>: {human?.createdAt}
         </li>
       </ul>
     </div>

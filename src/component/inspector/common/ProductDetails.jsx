@@ -20,10 +20,6 @@ export default function ProductDetails({ product }) {
           {product.expectedPoint?.toLocaleString()}원
         </span>
       </div>
-      <div className={styles['info-row']}>
-        <span className={styles['info-label']}>판매자 ID :</span>
-        <span className={styles['info-value']}>{product.userId}</span>
-      </div>
     </div>
   );
 }
