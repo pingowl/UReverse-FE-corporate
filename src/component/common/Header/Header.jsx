@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Header.module.css';
 import UserDropdown from './UserDropdown';
 import { fetchUserName } from '../../../api/fetchUserName';
@@ -9,17 +9,25 @@ function Header({ role }) {
   useEffect(() => {
     const getUserName = async () => {
       const result = await fetchUserName();
-      if (result.success) setUserName(result.name);
-      else setUserName(''); 
+      if (result.success) {
+        setUserName(result.name);
+      } else {
+        setUserName(''); // 또는 null
+      }
     };
     getUserName();
   }, []);
 
   return (
     <header className={styles.header}>
-      <UserDropdown userName={userName} role={role} />
+      {userName ? (
+        <UserDropdown userName={userName} role={role} />
+      ) : (
+        <span className={styles.loginNotice}>로그인이 필요합니다.</span>
+      )}
     </header>
   );
 }
 
 export default Header;
+

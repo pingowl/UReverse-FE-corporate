@@ -20,7 +20,7 @@ const Layout = ({ role }) => {
       <div style={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
         <Sidebar role={role} />
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-          <Header role={role} />
+          <Header role={role} key={localStorage.getItem('accessToken')} />
           <div style={{ flex: 1, overflowY: 'auto' }}>
             <main style={{ padding: '8px' }}>
               <Outlet />

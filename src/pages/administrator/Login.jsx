@@ -9,9 +9,7 @@ const Login = () => {
   return (
     <div
       style={{
-        display: "flex",
-        // justifyContent: "center", 
-        // alignItems: "center",   
+        display: "flex", 
         height: "100vh",          
         backgroundColor: "white"
       }}
