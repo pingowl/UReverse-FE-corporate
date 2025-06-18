@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import ProtectedRoute from './routes/ProtectedRoute';
 
+import Landing from './pages/Landing';
 import Login from './pages/administrator/Login';
 import Layout from './component/common/Layout';
 import Dashboard from './pages/administrator/Dashboard';
@@ -22,6 +23,7 @@ function App() {
     <Router>
       <Routes>
         {/* 로그인 페이지는 레이아웃 없이 */}
+        <Route path="/" element={<Landing />} />
         <Route path="/admin/login" element={<Login />} />
         <Route path="/inspector/login" element={<Login />} />
 
