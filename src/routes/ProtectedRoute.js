@@ -11,9 +11,13 @@ const ProtectedRoute = ({ children, requiredRole }) => {
 
     if (!token || (requiredRole && role !== requiredRole)) {
       alert('로그인이 필요합니다.');
-      navigate(requiredRole === 'ROLE_ADMIN' ? '/admin/login' : '/inspector/login');
+      if(requiredRole === 'ROLE_ADMIN'){
+        navigate('/admin/login');
+      }else if(requiredRole === 'ROLE_INSPECTOR'){
+        navigate('/inspector/login');
+      }
     }
-  }, []);
+  }, [navigate, requiredRole]);
 
   return children;
 };

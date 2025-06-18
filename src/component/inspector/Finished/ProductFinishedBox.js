@@ -16,7 +16,7 @@ const ProductFinishedBox = () => {
   const itemsPerPage = 6;
 
   const debouncedKeyword = useDebounce(keyword, 500); // 0.5초 후 검색
-
+ 
   const fetchProductsCallback = useCallback(async () => {
     const result = await fetchProducts({
       keyword: debouncedKeyword,
@@ -57,6 +57,8 @@ const ProductFinishedBox = () => {
             key={product.productId}
             id={product.productId}
             name={product.brandName}
+            categoryMain={product.categoryMain}
+            categorySub={product.categorySub}
             image={product.imageUrl}
             price={product.expectedPoint}
             date={product.createdAt}

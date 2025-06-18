@@ -1,0 +1,109 @@
+/* LoginBox */
+.loginWrapper{
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+.loginimg{
+  flex: 2;
+  display: flex;
+}
+.loginimg {
+  flex: 2;
+  position: relative;
+  overflow: hidden;
+}
+.slideImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.slideImage {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;   
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.show {
+  opacity: 1;
+  z-index: 1;
+}
+
+.landingFormDiv{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.landingContent{
+    margin: 0 auto;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  margin-bottom: 30px;
+}
+
+@font-face {
+  font-family: "RoundestSerialHeavy";
+  src: url("../../../../public/fonts/Roundest-Serial-Heavy\ Regular.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+.logoText {
+  font-family: "RoundestSerialHeavy", sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  color: #333;
+  margin-right: 10px;
+}
+
+/* 로그인 버튼 */
+.landingButton{
+background-color: #77BFA3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 1rem;
+  width: 350px;
+  height: 40px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin-top:10px;
+}
+
+.landingButton:hover{
+  cursor: pointer;
+  background-color: #5aa88d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.inspectorButton {
+  margin-top: 30px;
+  background-color: #FFD43B;
+}
+
+.inspectorButton:hover {
+  background-color: #f4c400;
+}
