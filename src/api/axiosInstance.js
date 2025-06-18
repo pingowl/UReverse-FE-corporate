@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { goTo } from '../utils/navigate';
 
 const instance = axios.create({
-  baseURL: '/api/v1',
+  baseURL: process.env.REACT_APP_API_BASE_URL + '/api/v1',
   withCredentials: true, // refreshToken 쿠키 자동 포함
 });
 
@@ -53,7 +54,7 @@ instance.interceptors.response.use(
         isRefreshing = true;
         try {
           // refresh 요청
-          const res = await axios.get('/api/v1/auth/refresh', {
+          const res = await instance.get('/auth/refresh', {
             withCredentials: true,
           });
           const newAccessToken = res.data.response.accessToken;
@@ -65,11 +66,11 @@ instance.interceptors.response.use(
         } catch (e) {
           // refresh도 실패하면 로그인 페이지로 이동
           if (path.startsWith('/admin')) {
-            window.location.href = '/admin/login';
+            goTo('/admin/login');
           } else if (path.startsWith('/inspector')) {
-            window.location.href = '/inspector/login';
+            goTo('/inspector/login');
           } else {
-            window.location.href = '/login';
+            goTo('/login');
           }
           return Promise.reject(e);
         } finally {
